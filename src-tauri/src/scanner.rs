@@ -37,15 +37,18 @@ pub fn emit_progress(
     );
 }
 
+/// Runs a full scan. `scan_id` is minted by the caller (`commands::start_scan`)
+/// so that progress events, the finished event and the stored report all share
+/// one identifier that the frontend can correlate.
 pub fn run_scan(
     app: &AppHandle,
     catalog: &Catalog,
     cancel: &AtomicBool,
+    scan_id: String,
     options: ScanOptions,
 ) -> AppResult<ScanReport> {
     let started = Instant::now();
     let started_at = util::now_rfc3339();
-    let scan_id = uuid::Uuid::new_v4().to_string();
 
     emit_progress(app, &scan_id, "opening", 4, "Opening repository…", "در حال باز کردن مخزن…", None);
     let repo = gitmod::open(&options.project_path)?;

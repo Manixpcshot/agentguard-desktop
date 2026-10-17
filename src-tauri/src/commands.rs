@@ -12,7 +12,7 @@ use std::fs;
 use std::path::Path;
 use std::sync::atomic::AtomicBool;
 use std::sync::{Arc, Mutex};
-use tauri::{AppHandle, Emitter, State};
+use tauri::{AppHandle, Emitter, Manager, State};
 use tauri_plugin_dialog::DialogExt;
 
 pub struct AppState {
@@ -95,7 +95,7 @@ pub fn start_scan(
     tauri::async_runtime::spawn(async move {
         let app_inner = app.clone();
         let outcome = tauri::async_runtime::spawn_blocking(move || {
-            scanner::run_scan(&app_inner, &catalog, &cancel, options)
+            scanner::run_scan(&app_inner, &catalog, &cancel, sid.clone(), options)
         })
         .await;
 
@@ -123,6 +123,11 @@ pub fn start_scan(
                     }),
                 );
             }
+        }
+
+        // Forget the cancel flag now that the scan is over.
+        if let Some(st) = app.try_state::<AppState>() {
+            st.scans.lock().unwrap().remove(&sid);
         }
     });
 
