@@ -99,7 +99,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B "$BRANCH"
-          git add ci-logs
+          git add -f ci-logs
           git commit -m "ci: publish cargo check log for $OS [skip ci]" || echo "nothing to commit"
           for i in 1 2 3 4 5 6; do
             git pull --rebase origin "$BRANCH" || true
@@ -127,7 +127,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B "$BRANCH"
-          git add ci-logs
+          git add -f ci-logs
           git commit -m "ci: publish cargo test log for $OS [skip ci]" || echo "nothing to commit"
           for i in 1 2 3 4 5 6; do
             git pull --rebase origin "$BRANCH" || true
