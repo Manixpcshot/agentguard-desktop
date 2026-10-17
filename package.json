@@ -2,7 +2,7 @@
   "name": "agentguard-desktop",
   "productName": "AgentGuard",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AgentGuard — review AI-generated code changes for leaked secrets, security issues, broken tests and suspicious edits. Fully local, no paid APIs.",
   "license": "MIT",
   "type": "module",

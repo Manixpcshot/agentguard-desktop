@@ -1,69 +1,114 @@
-## AgentGuard v0.1.0 — first release 🎉
+## AgentGuard v0.1.1 — secret-masking hardening
 
-**Download below.** Windows x64: pick the installer (`…_x64-setup.exe`), the MSI,
+**Download below.** Windows x64: the NSIS installer (`…_x64-setup.exe`), the MSI,
 or the portable executable. No paid APIs, no telemetry — everything runs locally.
 
-### What's inside
+This is a recommended update for anyone using v0.1.0: it closes a gap in how
+detected credentials were displayed and stored.
 
-- 🧩 **Real Git review** — working tree, staged changes, branch merge-base, a
-  single commit or the last N commits, with optional untracked files and a full
-  unified diff viewer.
-- 🛡 **144 detection rules / 7 engines** — secrets & API keys, dangerous
-  commands, security regressions, test integrity, suspicious changes, supply
-  chain, CI/CD hardening.
-- 🧠 **22 contextual heuristics** — typosquatted dependencies, lockfile drift,
-  removed assertions & CI test steps, zero-width/homoglyph characters,
-  `pull_request_target` + checkout, encoded blobs, and more.
-- 📊 **Risk score 0–100** with Safe→Critical bands and a PASS / REVIEW / BLOCK
-  verdict, plus per-severity, per-category and per-engine breakdowns.
-- 🔧 **Actionable findings** — remediation text, CWE references, confidence,
-  masked secret snippets, copy summary, jump to diff.
-- 🤖 **Optional local AI review** via Ollama (e.g. `qwen2.5-coder:7b`) — masked
-  diffs only, and the app is fully usable without it.
-- 🌐 **Bilingual** — English (default) and Persian with full RTL layout,
-  including rule explanations and exported reports.
-- 🔒 **Safety first** — scans are read-only. Redacting a secret (with backup) and
-  running your test suite both require an explicit, time-limited confirmation.
+### Fixed
+
+- 🔒 **Secrets are now masked everywhere they leave the app.** In v0.1.0 a
+  credential found by an engine other than *Secrets*, or by a heuristic that
+  reports no matched fragment (for example `SEC-SECRET-HIGH-ENTROPY-STRING`),
+  could appear in clear text in the finding's context line — and therefore in
+  the UI, the local JSON history and exported Markdown/HTML/JSON reports. Every
+  finding now passes a masking gate before it is emitted, stored or exported.
+- 🔒 **The optional Ollama prompt is really masked.** It documented a masked
+  diff but forwarded raw lines; secret-shaped tokens are now masked with the
+  catalog's secrets rules before the prompt is built.
+- The AWS access key rule keeps filtering the documented placeholder keys, and
+  masking keeps a recognizable prefix (`AKIA••••T4VB`) so findings stay useful.
+
+### Added
+
+- ✅ An end-to-end pipeline test: a real temporary Git repository → diff → all
+  seven engines → scoring. It asserts that a fake AWS key is flagged critical,
+  that `curl … | bash` is flagged, that the verdict is **BLOCK**, that the raw
+  key appears in neither the snippet nor the matched fragment, and that a clean
+  documentation change yields zero findings and **PASS**.
+- ✅ A catalog test for the new masking helper (`mask_secrets_in`) proving
+  ordinary code is left untouched.
+- 📛 CI / release / download / license / platform badges in both READMEs.
+- 📖 A **Cutting a release** checklist in `CONTRIBUTING.md`, documenting that
+  every tag must publish Windows binaries — never source only.
+
+### Unchanged in this release
+
+144 detection rules across 7 engines, risk scoring with PASS / REVIEW / BLOCK
+verdicts, read-only Git analysis, bilingual UI and reports (English default,
+فارسی with full RTL), optional local AI review, and confirmation-gated
+redaction / test execution.
 
 ### Install
 
-1. Download `AgentGuard_0.1.0_x64-setup.exe`.
-2. Run it (per-user install needs no admin rights).
+1. Download `AgentGuard_0.1.1_x64-setup.exe`.
+2. Run it (a per-user install needs no admin rights) — it upgrades v0.1.0 in
+   place and keeps your settings and history.
 3. Open a project folder → *Start scan*.
+
+Verify your download with `SHA256SUMS.txt` attached to this release:
+
+```powershell
+Get-FileHash AgentGuard_0.1.1_x64-setup.exe -Algorithm SHA256
+```
 
 Full guide: https://github.com/Manixpcshot/agentguard-desktop/blob/main/docs/en/installation.md
 
 ---
 
-## AgentGuard v0.1.0 — نخستین نسخه 🎉
+## AgentGuard v0.1.1 — سخت‌سازی ماسک‌سازی رازها
 
-**از پایین دانلود کنید.** ویندوز x64: نصب‌کننده (`…_x64-setup.exe`)، بسته MSI یا
-فایل اجرایی قابل‌حمل را انتخاب کنید. بدون API پولی، بدون تله‌متری — همه‌چیز محلی اجرا می‌شود.
+**از پایین دانلود کنید.** ویندوز x64: نصب‌کننده NSIS (`…_x64-setup.exe`)، بسته MSI
+یا فایل اجرایی قابل‌حمل. بدون API پولی، بدون تله‌متری — همه‌چیز محلی اجرا می‌شود.
 
-### چه چیزی داخل است
+این نسخه به همه کاربران v0.1.0 توصیه می‌شود: شکافی در نحوه نمایش و ذخیره
+اعتبارنامه‌های تشخیص‌شده برطرف شده است.
 
-- 🧩 **بازبینی واقعی Git** — درخت کاری، تغییرات staged، پایه ادغام شاخه، یک کامیت
-  یا N کامیت اخیر، با امکان شامل کردن فایل‌های ردیابی‌نشده و نمایش کامل diff.
-- 🛡 **۱۴۴ قانون تشخیص / ۷ موتور** — رازها و کلیدهای API، دستورات خطرناک،
-  رگرسیون‌های امنیتی، یکپارچگی تست، تغییرات مشکوک، زنجیره تأمین، سخت‌سازی CI/CD.
-- 🧠 **۲۲ هیوریستیک زمینه‌ای** — وابستگی‌های جعل‌نام، اختلاف lockfile، حذف
-  گزاره‌ها و گام‌های تست CI، نویسه‌های پهنای‌صفر/هم‌شکل، `pull_request_target` +
-  checkout، بلاب‌های کدگذاری‌شده و بیشتر.
-- 📊 **امتیاز ریسک ۰–۱۰۰** با بازه‌های امن تا بحرانی و حکم قبول / نیازمند
-  بازبینی / مسدود، به‌همراه تفکیک بر اساس شدت، دسته و موتور.
-- 🔧 **یافته‌های کاربردی** — متن راه اصلاح، ارجاع CWE، اطمینان، قطعه ماسک‌شده
-  راز، کپی خلاصه، پرش به diff.
-- 🤖 **بازبینی اختیاری با هوش مصنوعی محلی** از طریق Ollama (مثلاً
-  `qwen2.5-coder:7b`) — فقط diffهای ماسک‌شده؛ برنامه بدون آن هم کامل کار می‌کند.
-- 🌐 **دوزبانه** — انگلیسی (پیش‌فرض) و فارسی با چیدمان کامل راست‌به‌چپ، شامل توضیح
-  قوانین و گزارش‌های برون‌بری.
-- 🔒 **ایمنی در اولویت** — اسکن‌ها فقط-خواندنی‌اند. پوشاندن راز (همراه پشتیبان) و
-  اجرای مجموعه تست هر دو به تأیید صریح و زمان‌دار کاربر نیاز دارند.
+### اصلاح‌شده
+
+- 🔒 **رازها اکنون در هر نقطه‌ای که از برنامه بیرون می‌روند ماسک می‌شوند.** در
+  v0.1.0 اعتبارنامه‌ای که توسط موتوری غیر از *رازها* یا توسط هیوریستی بدون قطعه
+  منطبق (مثلاً `SEC-SECRET-HIGH-ENTROPY-STRING`) پیدا می‌شد، می‌توانست به‌صورت
+  متن آشکار در سطر زمینه یافته ظاهر شود — و در نتیجه در رابط کاربری، تاریخچه
+  JSON محلی و گزارش‌های برون‌بری Markdown/HTML/JSON. اکنون هر یافته پیش از ارسال،
+  ذخیره یا برون‌بری از یک دروازه ماسک‌سازی عبور می‌کند.
+- 🔒 **پرامپت اختیاری Ollama واقعاً ماسک می‌شود.** پیش‌تر diff ماسک‌شده را وعده
+  می‌داد ولی سطرهای خام را می‌فرستاد؛ اکنون توکن‌های شبیه راز پیش از ساخت پرامپت
+  با قوانین موتور رازها ماسک می‌شوند.
+- قانون کلید دسترسی AWS همچنان کلیدهای نمونه مستند را فیلتر می‌کند و ماسک‌سازی
+  پیشوندی قابل تشخیص نگه می‌دارد (`AKIA••••T4VB`) تا یافته‌ها کاربردی بمانند.
+
+### افزوده‌شده
+
+- ✅ تست سرتاسری خط لوله: یک مخزن Git موقت واقعی → diff → هر هفت موتور →
+  امتیازدهی. این تست تأیید می‌کند که یک کلید AWS جعلی بحرانی علامت می‌خورد،
+  `curl … | bash` تشخیص داده می‌شود، حکم **مسدود** است، کلید خام نه در قطعه و نه
+  در بخش منطبق ظاهر نمی‌شود، و یک تغییر تمیز مستندات صفر یافته و حکم **قبول** دارد.
+- ✅ تست فهرست قوانین برای تابع کمکی جدید ماسک‌سازی (`mask_secrets_in`) که نشان می‌دهد
+  کد معمولی دست‌نخورده می‌ماند.
+- 📛 نشان‌های CI / ریلیز / دانلود / پروانه / سکو در هر دو README.
+- 📖 چک‌لیست **انتشار نسخه** در `CONTRIBUTING.md` که قید می‌کند هر تگ باید
+  باینری‌های ویندوز را منتشر کند — نه فقط سورس.
+
+### بدون تغییر در این نسخه
+
+۱۴۴ قانون تشخیص در ۷ موتور، امتیازدهی ریسک با حکم‌های قبول / نیازمند بازبینی /
+مسدود، تحلیل فقط-خواندنی Git، رابط و گزارش دوزبانه (پیش‌فرض انگلیسی، فارسی با
+RTL کامل)، بازبینی اختیاری با هوش مصنوعی محلی، و پوشاندن راز / اجرای تست منوط به
+تأیید کاربر.
 
 ### نصب
 
-1. `AgentGuard_0.1.0_x64-setup.exe` را دانلود کنید.
-2. اجرا کنید (نصب per-user نیازی به دسترسی مدیر ندارد).
+1. `AgentGuard_0.1.1_x64-setup.exe` را دانلود کنید.
+2. اجرا کنید (نصب per-user دسترسی مدیر نمی‌خواهد) — v0.1.0 را در جا ارتقا می‌دهد
+   و تنظیمات و تاریخچه شما را نگه می‌دارد.
 3. پوشه پروژه را باز کنید → *شروع اسکن*.
+
+دانلود خود را با `SHA256SUMS.txt` پیوست‌شده به این نسخه راستی‌آزمایی کنید:
+
+```powershell
+Get-FileHash AgentGuard_0.1.1_x64-setup.exe -Algorithm SHA256
+```
 
 راهنمای کامل: https://github.com/Manixpcshot/agentguard-desktop/blob/main/docs/fa/installation.md
