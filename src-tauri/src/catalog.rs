@@ -150,6 +150,31 @@ impl Catalog {
     pub fn find(&self, id: &str) -> Option<&CompiledRule> {
         self.rules.iter().find(|r| r.rule.id == id)
     }
+
+    /// Masks every secret-shaped token in `line` using the secrets engine.
+    ///
+    /// Used before repository content leaves this process (the optional local
+    /// AI prompt) so a credential is never reproduced verbatim. Lines that
+    /// contain no secret are returned unchanged.
+    pub fn mask_secrets_in(&self, line: &str) -> String {
+        let mut out = line.to_string();
+        for cr in self.for_engine(Engine::Secrets) {
+            for rx in &cr.regexes {
+                for _ in 0..8 {
+                    let hit = match rx.find(&out) {
+                        Some(m) => m.as_str().to_string(),
+                        None => break,
+                    };
+                    let masked = crate::util::mask_secret(&hit);
+                    if masked == hit {
+                        break;
+                    }
+                    out = out.replacen(&hit, &masked, 1);
+                }
+            }
+        }
+        out
+    }
 }
 
 fn build_globs(patterns: &[String]) -> Result<GlobSet, String> {
@@ -180,6 +205,18 @@ mod tests {
         assert!(rule.path_matches("src/deploy.ts"));
         assert!(rule.regexes[0].is_match("const k = \"AKIAIOSFODNN7EXAMPLE\";"));
         assert!(rule.negatives_match("AKIAIOSFODNN7EXAMPLE")); // documented example is filtered
+    }
+
+    #[test]
+    fn masks_secrets_without_touching_ordinary_code() {
+        let catalog = Catalog::load().expect("catalog loads");
+        let key = "AKIAQ7Z3M9P2W8XRT4VB";
+        let masked = catalog.mask_secrets_in(&format!("const awsKey = \"{key}\";"));
+        assert!(!masked.contains(key), "secret survived masking: {masked}");
+        assert!(masked.contains("AKIA"), "mask should keep a recognizable prefix: {masked}");
+
+        let plain = "function greet(name) { return `hi ${name}`; }";
+        assert_eq!(catalog.mask_secrets_in(plain), plain, "ordinary code must not change");
     }
 
     #[test]

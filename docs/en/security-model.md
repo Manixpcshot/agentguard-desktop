@@ -26,10 +26,14 @@ instructions, and is built around these rules:
 4. **Path containment.** Relative paths passed by the UI are validated
    (`no '..'`, not absolute) before any file access; the project root comes
    from the folder picker.
-5. **Secrets never leave the report.** Detected secrets are masked
-   (`AKIA••••MPLE`) in findings, diffs, logs, exported reports and in the
-   prompt sent to a local Ollama model. The full value exists only in memory
-   during the single line rewrite of a redaction.
+5. **Secrets never leave the app in clear text.** A detected credential is
+   masked (`AKIA••••MPLE`) in the finding's snippet and matched fragment, in
+   exported reports, in logs and in the prompt sent to a local Ollama model.
+   Masking happens where findings are created, so heuristic detectors are
+   covered as well as regex rules. The diff viewer still renders your own
+   working-tree content unchanged — it is your repository, on your screen — and
+   the full value only exists in memory during the single-line rewrite of a
+   redaction.
 6. **No network by default.** The app makes zero outbound requests except,
    when enabled, to the Ollama host you configure (default
    `http://127.0.0.1:11434`). There is no telemetry, analytics or update

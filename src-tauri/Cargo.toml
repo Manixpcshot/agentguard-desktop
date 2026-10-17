@@ -1,6 +1,6 @@
 [package]
 name = "agentguard-desktop"
-version = "0.1.0"
+version = "0.1.1"
 description = "AgentGuard — local reviewer for AI-generated code changes: leaked secrets, security regressions, broken tests and suspicious edits."
 authors = ["AgentGuard contributors"]
 edition = "2021"

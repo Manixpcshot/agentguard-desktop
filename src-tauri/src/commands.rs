@@ -159,7 +159,11 @@ pub fn ollama_status(host: String) -> OllamaStatus {
 }
 
 #[tauri::command]
-pub fn run_ai_review(options: ScanOptions, findings: Vec<Finding>) -> AiAnalysis {
+pub fn run_ai_review(
+    state: State<'_, AppState>,
+    options: ScanOptions,
+    findings: Vec<Finding>,
+) -> AiAnalysis {
     let project = options.project_path.clone();
     let repo = match gitmod::open(&project) {
         Ok(r) => r,
@@ -176,7 +180,7 @@ pub fn run_ai_review(options: ScanOptions, findings: Vec<Finding>) -> AiAnalysis
     };
     let changes = gitmod::build_changes(&repo, &options.base, false, 1, options.max_file_bytes, None)
         .unwrap_or_default();
-    ollama::analyze(&options, &changes, &findings)
+    ollama::analyze(&options, &changes, &findings, &state.catalog)
 }
 
 #[tauri::command]

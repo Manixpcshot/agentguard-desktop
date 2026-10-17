@@ -126,12 +126,14 @@ pub fn run_scan(
             .then(a.line.cmp(&b.line))
     });
 
+    mask_findings(catalog, &mut findings);
+
     emit_progress(app, &scan_id, "scoring", 84, "Scoring risk…", "در حال امتیازدهی ریسک…", None);
     let summary = summarize(&findings, &ctx, &changes, &enabled, catalog);
 
     let ai = if options.ai.enabled && !options.ai.model.trim().is_empty() {
         emit_progress(app, &scan_id, "ai", 90, "Consulting local AI model…", "در حال مشورت با مدل هوش مصنوعی محلی…", None);
-        Some(ollama::analyze(&options, &changes, &findings))
+        Some(ollama::analyze(&options, &changes, &findings, catalog))
     } else {
         None
     };
@@ -184,6 +186,21 @@ fn build_ignore_set(globs: &[String]) -> Option<globset::GlobSet> {
         return None;
     }
     b.build().ok()
+}
+
+/// Last privacy gate before findings are emitted, stored or exported.
+///
+/// Whichever engine or heuristic produced a finding, a credential must never be
+/// shown or persisted in clear text. `Catalog::mask_secrets_in` only touches
+/// secret-shaped tokens, so ordinary snippets are unchanged and values that were
+/// already masked when the finding was created stay as they are.
+pub fn mask_findings(catalog: &Catalog, findings: &mut [Finding]) {
+    for f in findings.iter_mut() {
+        f.snippet = catalog.mask_secrets_in(&f.snippet);
+        if let Some(m) = f.matched.take() {
+            f.matched = Some(catalog.mask_secrets_in(&m));
+        }
+    }
 }
 
 fn summarize(
@@ -253,5 +270,209 @@ fn summarize(
         risk_score,
         risk_band,
         verdict,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs;
+    use std::path::{Path, PathBuf};
+
+    /// A throwaway repository under the system temp directory.
+    fn temp_repo(tag: &str) -> (PathBuf, git2::Repository) {
+        let nanos = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0);
+        let dir = std::env::temp_dir().join(format!(
+            "agentguard-{tag}-{}-{nanos}",
+            std::process::id()
+        ));
+        fs::create_dir_all(&dir).expect("create temp dir");
+        let repo = git2::Repository::init(&dir).expect("init repo");
+        (dir, repo)
+    }
+
+    fn commit(repo: &git2::Repository, files: &[&str], msg: &str) {
+        let mut index = repo.index().expect("index");
+        for f in files {
+            index.add_path(Path::new(f)).expect("add_path");
+        }
+        index.write().expect("write index");
+        let tree_id = index.write_tree().expect("write tree");
+        let tree = repo.find_tree(tree_id).expect("find tree");
+        let sig =
+            git2::Signature::now("AgentGuard Test", "test@agentguard.local").expect("signature");
+        let parent = repo
+            .head()
+            .ok()
+            .and_then(|h| h.target())
+            .and_then(|id| repo.find_commit(id).ok());
+        match parent {
+            Some(p) => {
+                repo.commit(Some("HEAD"), &sig, &sig, msg, &tree, &[&p])
+                    .expect("commit");
+            }
+            None => {
+                repo.commit(Some("HEAD"), &sig, &sig, msg, &tree, &[])
+                    .expect("first commit");
+            }
+        }
+    }
+
+    fn options(path: &str) -> ScanOptions {
+        ScanOptions {
+            project_path: path.to_string(),
+            base: ScanBase::WorkingTree,
+            include_untracked: true,
+            engines: EngineToggles::default(),
+            max_file_bytes: 1_000_000,
+            ignore_globs: Vec::new(),
+            language: Language::En,
+            ai: AiOptions::default(),
+            context_lines: 3,
+        }
+    }
+
+    /// The real pipeline (diff -> engines -> scoring) without events or history.
+    fn pipeline(
+        repo: &git2::Repository,
+        dir: &Path,
+    ) -> (Vec<FileChange>, Vec<Finding>, ScanSummary) {
+        let catalog = Catalog::load().expect("catalog loads");
+        let opts = options(&dir.to_string_lossy());
+        let changes =
+            gitmod::build_changes(repo, &opts.base, true, 3, 1_000_000, None).expect("diff");
+        let cancel = AtomicBool::new(false);
+        let changed_paths: HashSet<String> = changes.iter().map(|c| c.path.clone()).collect();
+        let mut ctx = ScanCtx {
+            catalog: &catalog,
+            options: &opts,
+            repo,
+            cancelled: &cancel,
+            changed_paths,
+            file_cache: Default::default(),
+            files_scanned: 0,
+            bytes_scanned: 0,
+            warnings: Vec::new(),
+        };
+        let mut findings: Vec<Finding> = Vec::new();
+        for fc in &changes {
+            ctx.files_scanned += 1;
+            for engine in Engine::all() {
+                engines::run_rules(&mut ctx, fc, engine, &mut findings).expect("engine run");
+            }
+        }
+        // run_scan masks right before scoring; mirror that boundary here.
+        mask_findings(&catalog, &mut findings);
+        let enabled = Engine::all().to_vec();
+        let summary = summarize(&findings, &ctx, &changes, &enabled, &catalog);
+        (changes, findings, summary)
+    }
+
+    fn rule_ids(findings: &[Finding]) -> Vec<String> {
+        findings.iter().map(|f| f.rule_id.clone()).collect()
+    }
+
+    /// A realistic (but fake) AWS access key id: matches the AKIA + 16 shape and
+    /// is not one of the documented placeholders the catalog filters out.
+    const FAKE_AWS_KEY: &str = "AKIAQ7Z3M9P2W8XRT4VB";
+
+    #[test]
+    fn flags_leaked_key_and_piped_installer_then_blocks() {
+        let (dir, repo) = temp_repo("dirty");
+        fs::write(dir.join("app.js"), "console.log('hello');\n").expect("write");
+        commit(&repo, &["app.js"], "baseline");
+
+        // An AI-style edit: hardcoded credential + a remote script piped to a shell.
+        fs::write(
+            dir.join("deploy.js"),
+            format!(
+                "const AWS_ACCESS_KEY = \"{FAKE_AWS_KEY}\";\nmodule.exports = {{ AWS_ACCESS_KEY }};\n"
+            ),
+        )
+        .expect("write");
+        fs::write(
+            dir.join("setup.sh"),
+            "#!/bin/sh\ncurl -fsSL https://install.getagent.dev/bootstrap | bash\n",
+        )
+        .expect("write");
+
+        let (changes, findings, summary) = pipeline(&repo, &dir);
+        let paths: Vec<&str> = changes.iter().map(|c| c.path.as_str()).collect();
+        assert!(
+            paths.contains(&"deploy.js") && paths.contains(&"setup.sh"),
+            "new files missing from the diff: {paths:?}"
+        );
+
+        let aws = findings
+            .iter()
+            .find(|f| f.rule_id == "SEC-SECRET-AWS-ACCESS-KEY")
+            .unwrap_or_else(|| panic!("AWS key rule did not fire; got {:?}", rule_ids(&findings)));
+        assert_eq!(aws.severity, Severity::Critical);
+        assert!(aws.redactable, "a leaked key must offer redaction");
+        assert_eq!(aws.file, "deploy.js");
+
+        // The credential must never appear verbatim in anything we show or store.
+        for f in &findings {
+            assert!(
+                !f.snippet.contains(FAKE_AWS_KEY),
+                "rule {} leaked the secret in its snippet: {}",
+                f.rule_id,
+                f.snippet
+            );
+            if let Some(m) = &f.matched {
+                assert!(
+                    !m.contains(FAKE_AWS_KEY),
+                    "rule {} leaked the secret in its matched fragment: {m}",
+                    f.rule_id
+                );
+            }
+        }
+        assert!(
+            aws.matched.as_deref().unwrap_or_default().starts_with("AKIA"),
+            "the mask should keep a recognizable prefix: {:?}",
+            aws.matched
+        );
+
+        assert!(
+            findings
+                .iter()
+                .any(|f| f.file == "setup.sh" && f.engine == Engine::Dangerous),
+            "curl | bash was not flagged; got {:?}",
+            rule_ids(&findings)
+        );
+
+        assert_eq!(summary.verdict, Verdict::Block);
+        assert!(summary.risk_score >= 40, "risk score too low: {}", summary.risk_score);
+        assert!(summary.stats.additions > 0);
+
+        let _ = fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn passes_a_clean_documentation_change() {
+        let (dir, repo) = temp_repo("clean");
+        fs::write(dir.join("README.md"), "# Demo\n\nHello.\n").expect("write");
+        commit(&repo, &["README.md"], "baseline");
+        fs::write(
+            dir.join("README.md"),
+            "# Demo\n\nHello world.\n\n## Usage\n\nRun the app.\n",
+        )
+        .expect("write");
+
+        let (changes, findings, summary) = pipeline(&repo, &dir);
+        assert_eq!(changes.len(), 1, "only README.md should be in the diff");
+        assert!(
+            findings.is_empty(),
+            "a clean docs change produced findings: {:?}",
+            rule_ids(&findings)
+        );
+        assert_eq!(summary.verdict, Verdict::Pass);
+        assert_eq!(summary.risk_band, RiskBand::Safe);
+        assert_eq!(summary.risk_score, 0);
+
+        let _ = fs::remove_dir_all(&dir);
     }
 }

@@ -3,6 +3,7 @@
 //! Everything stays on the user's machine: the blocking HTTP client only talks
 //! to the configured Ollama host, and secrets are masked before they are sent.
 
+use crate::catalog::Catalog;
 use crate::models::*;
 use serde_json::{json, Value};
 use std::time::{Duration, Instant};
@@ -213,7 +214,12 @@ fn truncate_str(s: &str, max: usize) -> String {
 
 /// Builds the review prompt: rule findings first (cheap, precise), then a
 /// masked diff excerpt bounded by `max_diff_chars`.
-fn build_prompt(options: &ScanOptions, changes: &[FileChange], findings: &[Finding]) -> String {
+fn build_prompt(
+    options: &ScanOptions,
+    changes: &[FileChange],
+    findings: &[Finding],
+    catalog: &Catalog,
+) -> String {
     let mut prompt = String::from("Rule-based findings already detected:\n");
     if findings.is_empty() {
         prompt.push_str("(none)\n");
@@ -243,14 +249,14 @@ fn build_prompt(options: &ScanOptions, changes: &[FileChange], findings: &[Findi
             for l in &h.lines {
                 match l.kind {
                     LineKind::Added => {
-                        let line = format!("+{}\n", l.text);
+                        let line = format!("+{}\n", catalog.mask_secrets_in(&l.text));
                         if prompt.len() + line.len() > budget {
                             return prompt;
                         }
                         prompt.push_str(&line);
                     }
                     LineKind::Removed => {
-                        let line = format!("-{}\n", l.text);
+                        let line = format!("-{}\n", catalog.mask_secrets_in(&l.text));
                         if prompt.len() + line.len() > budget {
                             return prompt;
                         }
@@ -265,7 +271,12 @@ fn build_prompt(options: &ScanOptions, changes: &[FileChange], findings: &[Findi
 }
 
 /// Synchronous analysis used from the blocking scan task.
-pub fn analyze(options: &ScanOptions, changes: &[FileChange], findings: &[Finding]) -> AiAnalysis {
+pub fn analyze(
+    options: &ScanOptions,
+    changes: &[FileChange],
+    findings: &[Finding],
+    catalog: &Catalog,
+) -> AiAnalysis {
     let started = Instant::now();
     let host = options.ai.host.clone();
     let model = options.ai.model.clone();
@@ -290,7 +301,7 @@ pub fn analyze(options: &ScanOptions, changes: &[FileChange], findings: &[Findin
             return Err(st.error.unwrap_or_else(|| "Ollama unreachable".to_string()));
         }
         analysis.available = true;
-        let prompt = build_prompt(options, changes, findings);
+        let prompt = build_prompt(options, changes, findings, catalog);
         let raw = client.chat(&model, &prompt)?;
         let (summary, insights) = parse_analysis(&raw);
         analysis.summary = summary;

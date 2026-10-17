@@ -23,7 +23,7 @@
 نصب بی‌صدا:
 
 ```powershell
-AgentGuard_0.1.0_x64-setup.exe /S
+AgentGuard_0.1.1_x64-setup.exe /S
 ```
 
 ## گزینه ۲ — بسته MSI
@@ -31,7 +31,7 @@ AgentGuard_0.1.0_x64-setup.exe /S
 برای استقرار سازمانی (Group Policy / SCCM):
 
 ```powershell
-msiexec /i AgentGuard_0.1.0_x64_en-US.msi /qn
+msiexec /i AgentGuard_0.1.1_x64_en-US.msi /qn
 ```
 
 ## گزینه ۳ — اجرایی قابل‌حمل

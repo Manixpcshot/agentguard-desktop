@@ -48,3 +48,6 @@ coverage/
 # Python bytecode
 __pycache__/
 *.py[cod]
+
+# CI scratch (never committed)
+ci-logs/

@@ -12,6 +12,12 @@
 
 [English](README.md) · [فارسی](README.fa.md)
 
+[![CI](https://github.com/Manixpcshot/agentguard-desktop/actions/workflows/ci.yml/badge.svg)](https://github.com/Manixpcshot/agentguard-desktop/actions/workflows/ci.yml)
+[![Release](https://github.com/Manixpcshot/agentguard-desktop/actions/workflows/release.yml/badge.svg)](https://github.com/Manixpcshot/agentguard-desktop/actions/workflows/release.yml)
+[![Latest release](https://img.shields.io/github/v/release/Manixpcshot/agentguard-desktop?label=download&color=2E86FF)](https://github.com/Manixpcshot/agentguard-desktop/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-0FBFA8)](LICENSE)
+![Platform](https://img.shields.io/badge/platform-Windows%20x64-0A0F1E)
+
 [دانلود آخرین نسخه](https://github.com/Manixpcshot/agentguard-desktop/releases/latest) ·
 [مستندات](docs/fa/installation.md) · [گزارش مشکل](https://github.com/Manixpcshot/agentguard-desktop/issues)
 

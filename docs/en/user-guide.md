@@ -56,8 +56,8 @@ Filters: severity pills, engine dropdown and free-text search (file, rule id,
 snippet, tags). Selecting a finding opens the detail panel:
 
 - localized title, description and **remediation**
-- file and line, matched fragment (secrets are masked — you never see the full
-  value in the UI or reports)
+- file and line, matched fragment (secrets are masked, so the full value is
+  never stored in history or written into an exported report)
 - CWE identifiers, references, tags, confidence
 - actions:
   - **Copy** a plain-text summary for your issue tracker

@@ -144,12 +144,9 @@ fn run_regex_rule(
             .iter()
             .find_map(|r| r.find(&text).map(|m| m.as_str().to_string()))
             .unwrap_or_default();
-        let shown = if cr.rule.engine == Engine::Secrets || cr.rule.redactable {
-            util::mask_secret(&matched_text)
-        } else {
-            truncate(&matched_text, 160)
-        };
-        push_finding(cr, fc, line_no, side, trimmed, Some(shown), None, None, out);
+        // `push_finding` masks both the fragment and the surrounding line for
+        // sensitive rules, so the raw value is handed over untouched here.
+        push_finding(cr, fc, line_no, side, trimmed, Some(matched_text), None, None, out);
         emitted += 1;
     }
     Ok(())
@@ -170,10 +167,24 @@ pub fn push_finding(
     if out.len() >= 2500 {
         return;
     }
-    let matched_str = matched.clone().unwrap_or_default();
     let rule = &cr.rule;
+    let sensitive = rule.engine == Engine::Secrets || rule.redactable;
+    let raw_matched = matched.clone().unwrap_or_default();
+
+    // Never let a raw credential reach the UI, the history files or an exported
+    // report: mask the fragment and every occurrence of it in the context line.
+    let shown_matched = match matched {
+        Some(m) if sensitive && maskable(&m, !cr.regexes.is_empty()) => Some(util::mask_secret(&m)),
+        other => other,
+    };
+    let snippet_text = if sensitive {
+        mask_line(snippet, cr, &raw_matched)
+    } else {
+        snippet.to_string()
+    };
+
     out.push(Finding {
-        id: util::finding_id(&rule.id, &fc.path, line, &matched_str),
+        id: util::finding_id(&rule.id, &fc.path, line, &raw_matched),
         rule_id: rule.id.clone(),
         engine: rule.engine,
         category: rule.category,
@@ -182,8 +193,8 @@ pub fn push_finding(
         file: fc.path.clone(),
         line,
         end_line: None,
-        snippet: truncate(snippet, 300),
-        matched,
+        snippet: truncate(&snippet_text, 300),
+        matched: shown_matched,
         side: side.to_string(),
         text: rule.text.clone(),
         cwe: rule.cwe.clone(),
@@ -191,6 +202,48 @@ pub fn push_finding(
         tags: rule.tags.clone(),
         redactable: rule.redactable,
     });
+}
+
+/// Whether a detected fragment is worth masking.
+///
+/// Regex-detected hits are always masked (they *are* the credential). For
+/// heuristic detectors without patterns we only mask credential-shaped values,
+/// so file names such as `id_rsa` stay readable.
+fn maskable(value: &str, from_regex: bool) -> bool {
+    let v = value.trim();
+    if v.is_empty() {
+        return false;
+    }
+    if from_regex {
+        return true;
+    }
+    v.chars().count() >= 12 && !v.contains(['/', '\\', ' '])
+}
+
+/// Masks secret-shaped content inside a context line.
+fn mask_line(line: &str, cr: &CompiledRule, matched: &str) -> String {
+    let mut out = line.to_string();
+    for rx in &cr.regexes {
+        for _ in 0..8 {
+            let hit = match rx.find(&out) {
+                Some(m) => m.as_str().to_string(),
+                None => break,
+            };
+            let masked = util::mask_secret(&hit);
+            if masked == hit {
+                break;
+            }
+            out = out.replacen(&hit, &masked, 1);
+        }
+    }
+    let m = matched.trim();
+    if !m.is_empty() && m.chars().count() >= 8 && out.contains(m) {
+        let masked = util::mask_secret(m);
+        if masked != m {
+            out = out.replace(m, &masked);
+        }
+    }
+    out
 }
 
 pub fn truncate(s: &str, max: usize) -> String {

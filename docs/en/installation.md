@@ -23,7 +23,7 @@
 Silent install:
 
 ```powershell
-AgentGuard_0.1.0_x64-setup.exe /S
+AgentGuard_0.1.1_x64-setup.exe /S
 ```
 
 ## Option 2 — MSI package
@@ -31,7 +31,7 @@ AgentGuard_0.1.0_x64-setup.exe /S
 For group-policy / SCCM deployments:
 
 ```powershell
-msiexec /i AgentGuard_0.1.0_x64_en-US.msi /qn
+msiexec /i AgentGuard_0.1.1_x64_en-US.msi /qn
 ```
 
 ## Option 3 — Portable executable
