@@ -93,7 +93,7 @@ pub fn repo_info(repo: &Repository, fallback_path: &str) -> RepoInfo {
     }
 
     if let Ok(remotes) = repo.remotes() {
-        info.remotes = remotes.iter().filter_map(|r| r.ok().map(|s| s.to_string())).collect();
+        info.remotes = remotes.iter().filter_map(|r| r.ok().flatten().map(|s| s.to_string())).collect();
     }
 
     info
