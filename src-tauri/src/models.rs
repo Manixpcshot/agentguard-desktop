@@ -101,7 +101,7 @@ pub enum Engine {
     Tests,
     Suspicious,
     SupplyChain,
-    Cicd,
+    CiCd,
 }
 
 impl Engine {
@@ -113,7 +113,7 @@ impl Engine {
             Engine::Tests => "tests",
             Engine::Suspicious => "suspicious",
             Engine::SupplyChain => "supply_chain",
-            Engine::Cicd => "ci_cd",
+            Engine::CiCd => "ci_cd",
         }
     }
 
@@ -125,7 +125,7 @@ impl Engine {
             Engine::Tests,
             Engine::Suspicious,
             Engine::SupplyChain,
-            Engine::Cicd,
+            Engine::CiCd,
         ]
     }
 }
@@ -360,7 +360,7 @@ impl EngineToggles {
             Engine::Tests => self.tests,
             Engine::Suspicious => self.suspicious,
             Engine::SupplyChain => self.supply_chain,
-            Engine::Cicd => self.ci_cd,
+            Engine::CiCd => self.ci_cd,
         }
     }
 }
@@ -682,4 +682,64 @@ pub struct RedactResult {
     pub file: String,
     pub backup: Option<String>,
     pub replaced: u32,
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn json_name<T: Serialize>(v: &T) -> String {
+        serde_json::to_string(v).unwrap().trim_matches('"').to_string()
+    }
+
+    /// The catalog (`resources/rules.json`), the frontend dictionaries and
+    /// `as_str()` must all agree on the wire names. A mismatch here broke the
+    /// embedded catalog once already (`Cicd` serializing as `cicd`).
+    #[test]
+    fn engine_serde_names_match_as_str() {
+        for e in Engine::all() {
+            assert_eq!(json_name(&e), e.as_str(), "Engine wire name != as_str()");
+            let raw = format!("\"{}\"", e.as_str());
+            assert_eq!(serde_json::from_str::<Engine>(&raw).unwrap(), e);
+        }
+    }
+
+    #[test]
+    fn category_and_severity_serde_names_match_as_str() {
+        for c in Category::all() {
+            assert_eq!(json_name(&c), c.as_str(), "Category wire name != as_str()");
+        }
+        for s in Severity::all() {
+            assert_eq!(json_name(&s), s.as_str(), "Severity wire name != as_str()");
+        }
+    }
+
+    /// The React store reads `supplyChain` / `ciCd` (camelCase).
+    #[test]
+    fn engine_toggles_use_camel_case_keys() {
+        let toggles = EngineToggles::default();
+        let obj = serde_json::to_value(&toggles).unwrap();
+        let obj = obj.as_object().expect("object");
+        for key in [
+            "secrets",
+            "dangerous",
+            "security",
+            "tests",
+            "suspicious",
+            "supplyChain",
+            "ciCd",
+        ] {
+            assert!(obj.contains_key(key), "missing toggle key {key}");
+        }
+        assert!(Engine::all().iter().all(|e| toggles.enabled(*e)));
+    }
+
+    #[test]
+    fn defaults_are_the_quiet_end_of_every_scale() {
+        assert_eq!(Severity::default(), Severity::Info);
+        assert_eq!(RiskBand::default(), RiskBand::Safe);
+        assert_eq!(Verdict::default(), Verdict::Pass);
+        assert_eq!(ScanBase::default(), ScanBase::WorkingTree);
+        assert_eq!(Language::default(), Language::En);
+    }
 }
