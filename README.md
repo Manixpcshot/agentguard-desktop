@@ -12,6 +12,12 @@ explanations and concrete remediation advice.
 
 [English](README.md) · [فارسی](README.fa.md)
 
+[![CI](https://github.com/Manixpcshot/agentguard-desktop/actions/workflows/ci.yml/badge.svg)](https://github.com/Manixpcshot/agentguard-desktop/actions/workflows/ci.yml)
+[![Release](https://github.com/Manixpcshot/agentguard-desktop/actions/workflows/release.yml/badge.svg)](https://github.com/Manixpcshot/agentguard-desktop/actions/workflows/release.yml)
+[![Latest release](https://img.shields.io/github/v/release/Manixpcshot/agentguard-desktop?label=download&color=2E86FF)](https://github.com/Manixpcshot/agentguard-desktop/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-0FBFA8)](LICENSE)
+![Platform](https://img.shields.io/badge/platform-Windows%20x64-0A0F1E)
+
 [Download the latest release](https://github.com/Manixpcshot/agentguard-desktop/releases/latest) ·
 [Documentation](docs/en/installation.md) · [Report an issue](https://github.com/Manixpcshot/agentguard-desktop/issues)
 

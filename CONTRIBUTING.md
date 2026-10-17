@@ -73,6 +73,35 @@ Add a unit test in the same file.
 4. Security problems in AgentGuard itself go to [SECURITY.md](SECURITY.md),
    not to a public issue.
 
+## Cutting a release
+
+Every release **must** ship Windows binaries — a source-only release is not
+acceptable for this project.
+
+1. Bump the version in all three places (they must agree):
+   `package.json`, `src-tauri/tauri.conf.json` and `src-tauri/Cargo.toml`,
+   then refresh the lockfile (`cd src-tauri && cargo check`).
+2. Update `CHANGELOG.md` and `docs/fa/changelog.md`, and rewrite
+   `RELEASE_NOTES.md` — it is used verbatim as the GitHub Release body, so keep
+   the English section first and the Persian section below it.
+3. Open a PR and wait for CI to go green (catalog, frontend typecheck + build,
+   `cargo check` on Ubuntu **and** Windows, `cargo test`).
+4. Merge, then tag the merge commit on `main` and push the tag:
+
+   ```bash
+   git tag -a v0.1.1 -m "AgentGuard v0.1.1"
+   git push origin v0.1.1
+   ```
+
+5. The Release workflow builds `x86_64-pc-windows-msvc` bundles and publishes
+   `AgentGuard_<version>_x64-setup.exe` (NSIS installer),
+   `AgentGuard_<version>_x64_en-US.msi`, `AgentGuard-portable.exe` and
+   `SHA256SUMS.txt` to the GitHub Release. On failure it uploads
+   `tauri-build-log` as a workflow artifact.
+6. Check the result: the release is public (not a draft), targets `main`, and
+   has all four assets. A `-rc.N` / `-beta` suffix in the tag is published as a
+   prerelease automatically.
+
 ---
 
 ## مشارکت در ایجنت‌گارد (خلاصه)
