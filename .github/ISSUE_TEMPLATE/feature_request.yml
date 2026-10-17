@@ -1,0 +1,42 @@
+name: Feature request
+description: Suggest an improvement, a new rule or a new engine
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of request is this?
+      options:
+        - New detection rule
+        - New heuristic / engine
+        - UI or UX improvement
+        - Report / export format
+        - Localization (English or Persian)
+        - Performance
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      placeholder: What problem does this solve? A concrete example of a missed issue is very helpful.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      placeholder: Describe what you would like AgentGuard to do.
+    validations:
+      required: true
+  - type: textarea
+    id: sample
+    attributes:
+      label: Sample code that should be flagged (for rules)
+      description: Redact any real secrets.
+      render: text
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

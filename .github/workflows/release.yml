@@ -1,0 +1,114 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-windows:
+    name: Windows installer + executable
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - run: npm ci
+
+      - name: Print versions
+        shell: pwsh
+        run: |
+          node --version
+          npm --version
+          rustc --version
+          cargo --version
+
+      - name: Build bundles (NSIS installer + MSI + exe)
+        shell: pwsh
+        run: |
+          npm run tauri build -- --target x86_64-pc-windows-msvc --bundles nsis,msi 2>&1 |
+            Tee-Object -FilePath tauri-build.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Upload build log (on failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-build-log
+          path: tauri-build.log
+          if-no-files-found: ignore
+
+      - name: Collect artifacts and checksums
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $rel = 'src-tauri/target/x86_64-pc-windows-msvc/release'
+          $bundle = "$rel/bundle"
+          New-Item -ItemType Directory -Force -Path dist-release | Out-Null
+
+          $found = Get-ChildItem -Recurse $bundle -Include *.exe, *.msi -File
+          if (-not $found) { throw "no installer artifacts found under $bundle" }
+          $found | ForEach-Object { Copy-Item $_.FullName dist-release/ }
+
+          # The raw executable keeps the Cargo crate name unless Tauri renames it.
+          $exe = @(
+            "$rel/AgentGuard.exe",
+            "$rel/agentguard-desktop.exe"
+          ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $exe) {
+            $exe = Get-ChildItem $rel -Filter *.exe -File |
+              Where-Object { $_.Name -notmatch 'build' } |
+              Sort-Object Length -Descending | Select-Object -First 1 -ExpandProperty FullName
+          }
+          if (-not $exe) { throw "no application executable found under $rel" }
+          Copy-Item $exe dist-release/AgentGuard-portable.exe
+
+          $files = Get-ChildItem dist-release -File | Sort-Object Name
+          $files | ForEach-Object {
+            $h = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            Add-Content -Path dist-release/SHA256SUMS.txt -Value ("{0}  {1}" -f $h, $_.Name)
+          }
+          Write-Host "=== release artifacts ==="
+          $files | ForEach-Object { Write-Host ("{0,-52} {1,8:N1} MB" -f $_.Name, ($_.Length / 1MB)) }
+          Write-Host "=== SHA256SUMS.txt ==="
+          Get-Content dist-release/SHA256SUMS.txt
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: agentguard-windows
+          path: dist-release/*
+          if-no-files-found: error
+
+      - name: Create GitHub Release with binaries
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist-release/*.exe
+            dist-release/*.msi
+            dist-release/SHA256SUMS.txt
+          body_path: RELEASE_NOTES.md
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
