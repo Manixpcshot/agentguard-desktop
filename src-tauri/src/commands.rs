@@ -90,18 +90,23 @@ pub fn start_scan(
 
     let catalog = state.catalog.clone();
     let sid = scan_id.clone();
+    let task_sid = scan_id.clone();
     let project = options.project_path.clone();
 
     tauri::async_runtime::spawn(async move {
         let app_inner = app.clone();
         let outcome = tauri::async_runtime::spawn_blocking(move || {
-            scanner::run_scan(&app_inner, &catalog, &cancel, sid.clone(), options)
+            scanner::run_scan(&app_inner, &catalog, &cancel, task_sid, options)
         })
         .await;
 
+        // The scan has settled: forget its cancel flag before `sid` is consumed.
+        if let Some(st) = app.try_state::<AppState>() {
+            st.scans.lock().unwrap().remove(&sid);
+        }
+
         match outcome {
-            Ok(Ok(mut report)) => {
-                report.id = sid.clone();
+            Ok(Ok(report)) => {
                 let _ = projects::remember(&app, &project, true);
                 let _ = app.emit(
                     scanner::EVENT_FINISHED,
@@ -123,11 +128,6 @@ pub fn start_scan(
                     }),
                 );
             }
-        }
-
-        // Forget the cancel flag now that the scan is over.
-        if let Some(st) = app.try_state::<AppState>() {
-            st.scans.lock().unwrap().remove(&sid);
         }
     });
 
