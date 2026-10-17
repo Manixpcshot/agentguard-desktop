@@ -126,16 +126,7 @@ pub fn run_scan(
             .then(a.line.cmp(&b.line))
     });
 
-    // Final privacy pass: whatever engine or heuristic produced a finding, a
-    // credential must not reach the UI, the JSON history or an exported report
-    // in clear text. `mask_secrets_in` only touches secret-shaped tokens, so
-    // ordinary snippets are unchanged and already-masked values stay as they are.
-    for f in &mut findings {
-        f.snippet = catalog.mask_secrets_in(&f.snippet);
-        if let Some(m) = f.matched.take() {
-            f.matched = Some(catalog.mask_secrets_in(&m));
-        }
-    }
+    mask_findings(catalog, &mut findings);
 
     emit_progress(app, &scan_id, "scoring", 84, "Scoring risk…", "در حال امتیازدهی ریسک…", None);
     let summary = summarize(&findings, &ctx, &changes, &enabled, catalog);
@@ -195,6 +186,21 @@ fn build_ignore_set(globs: &[String]) -> Option<globset::GlobSet> {
         return None;
     }
     b.build().ok()
+}
+
+/// Last privacy gate before findings are emitted, stored or exported.
+///
+/// Whichever engine or heuristic produced a finding, a credential must never be
+/// shown or persisted in clear text. `Catalog::mask_secrets_in` only touches
+/// secret-shaped tokens, so ordinary snippets are unchanged and values that were
+/// already masked when the finding was created stay as they are.
+pub fn mask_findings(catalog: &Catalog, findings: &mut [Finding]) {
+    for f in findings.iter_mut() {
+        f.snippet = catalog.mask_secrets_in(&f.snippet);
+        if let Some(m) = f.matched.take() {
+            f.matched = Some(catalog.mask_secrets_in(&m));
+        }
+    }
 }
 
 fn summarize(
@@ -358,6 +364,8 @@ mod tests {
                 engines::run_rules(&mut ctx, fc, engine, &mut findings).expect("engine run");
             }
         }
+        // run_scan masks right before scoring; mirror that boundary here.
+        mask_findings(&catalog, &mut findings);
         let enabled = Engine::all().to_vec();
         let summary = summarize(&findings, &ctx, &changes, &enabled, &catalog);
         (changes, findings, summary)
