@@ -10,322 +10,322 @@
       Adding toml_datetime v0.6.3 (available: v0.6.11)
       Adding toml_edit v0.20.2 (available: v0.20.7)
  Downloading crates ...
-  Downloaded adler2 v2.0.1
-  Downloaded digest v0.10.7
   Downloaded dpi v0.1.2
+  Downloaded dirs v7.0.0
+  Downloaded adler2 v2.0.1
+  Downloaded ident_case v1.0.1
+  Downloaded phf_codegen v0.13.1
+  Downloaded vswhom v0.1.0
+  Downloaded dirs-sys v0.5.0
   Downloaded dunce v1.0.5
   Downloaded dirs v6.0.0
-  Downloaded find-msvc-tools v0.1.14
-  Downloaded derive_more v2.1.1
-  Downloaded derive_more-impl v2.1.1
-  Downloaded dom_query v0.28.0
-  Downloaded displaydoc v0.2.7
-  Downloaded dirs-sys v0.5.0
-  Downloaded generic-array v0.14.7
-  Downloaded vswhom-sys v0.1.3
-  Downloaded windows-strings v0.5.1
+  Downloaded equivalent v1.0.3
   Downloaded futures-io v0.3.34
-  Downloaded futures-macro v0.3.34
-  Downloaded getrandom v0.3.4
-  Downloaded windows-targets v0.53.5
-  Downloaded hyper-rustls v0.27.10
-  Downloaded http-body-util v0.1.5
-  Downloaded tower-layer v0.3.3
-  Downloaded try-lock v0.2.5
-  Downloaded untrusted v0.9.0
-  Downloaded winapi-util v0.1.11
-  Downloaded flate2 v1.1.10
-  Downloaded yoke-derive v0.8.4
-  Downloaded cfg_aliases v0.2.2
   Downloaded dtoa-short v0.3.5
-  Downloaded icu_collections v2.3.0
-  Downloaded infer v0.22.0
-  Downloaded web-time v1.1.0
-  Downloaded webview2-com v0.39.1
-  Downloaded windows-future v0.3.2
-  Downloaded cargo-platform v0.1.9
-  Downloaded cpufeatures v0.3.1
-  Downloaded getrandom v0.4.3
-  Downloaded hyper v1.12.0
-  Downloaded html5ever v0.39.0
-  Downloaded hashbrown v0.17.1
-  Downloaded bit-set v0.8.0
+  Downloaded futures-macro v0.3.34
+  Downloaded futures-sink v0.3.34
+  Downloaded generic-array v0.14.7
+  Downloaded itoa v1.0.18
+  Downloaded want v0.3.2
+  Downloaded jiff-tzdb-platform v0.1.3
+  Downloaded fnv v1.0.7
+  Downloaded futures-task v0.3.34
+  Downloaded option-ext v0.2.0
+  Downloaded idna_adapter v1.2.2
+  Downloaded lru-slab v0.1.3
+  Downloaded hex v0.4.3
+  Downloaded form_urlencoded v1.2.2
+  Downloaded futures-core v0.3.34
+  Downloaded new_debug_unreachable v1.0.6
+  Downloaded phf_generator v0.13.1
+  Downloaded typeid v1.0.3
+  Downloaded untrusted v0.9.0
+  Downloaded digest v0.10.7
+  Downloaded num-conv v0.2.2
+  Downloaded percent-encoding v2.3.2
+  Downloaded heck v0.5.0
+  Downloaded displaydoc v0.2.7
+  Downloaded dyn-clone v1.0.20
+  Downloaded fastrand v2.5.0
   Downloaded fdeflate v0.3.7
   Downloaded foldhash v0.2.0
-  Downloaded ident_case v1.0.1
-  Downloaded heck v0.5.0
-  Downloaded futures-core v0.3.34
-  Downloaded jiff-tzdb-platform v0.1.3
-  Downloaded fastrand v2.5.0
-  Downloaded unicode-ident v1.0.27
-  Downloaded windows-interface v0.59.3
-  Downloaded dirs v7.0.0
-  Downloaded git2 v0.21.0
-  Downloaded vswhom v0.1.0
-  Downloaded windows-result v0.4.1
-  Downloaded zerovec-derive v0.11.6
-  Downloaded futures-channel v0.3.34
-  Downloaded icu_normalizer v2.3.0
-  Downloaded ico v0.5.0
-  Downloaded indexmap v2.14.2
-  Downloaded open v5.4.4
-  Downloaded http v1.5.0
   Downloaded glob v0.3.4
-  Downloaded icu_properties v2.3.0
-  Downloaded idna_adapter v1.2.2
-  Downloaded utf8_iter v1.0.4
-  Downloaded want v0.3.2
-  Downloaded windows-version v0.1.7
-  Downloaded phf_generator v0.13.1
-  Downloaded httparse v1.10.1
-  Downloaded mime v0.3.17
-  Downloaded icu_provider v2.3.1
-  Downloaded jsonptr v0.7.1
-  Downloaded embed-resource v3.0.12
-  Downloaded indexmap v1.9.3
-  Downloaded keyboard-types v0.8.3
-  Downloaded tracing-attributes v0.1.31
-  Downloaded urlpattern v0.6.0
-  Downloaded version_check v0.9.5
-  Downloaded webview2-com-macros v0.8.1
-  Downloaded byteorder v1.5.0
-  Downloaded dyn-clone v1.0.20
-  Downloaded fnv v1.0.7
-  Downloaded icu_normalizer_data v2.3.0
-  Downloaded ipnet v2.12.2
-  Downloaded lru-slab v0.1.3
-  Downloaded typeid v1.0.3
-  Downloaded windows-implement v0.60.2
-  Downloaded windows-threading v0.2.1
-  Downloaded alloc-stdlib v0.3.0
-  Downloaded atomic-waker v1.1.2
-  Downloaded block-buffer v0.10.4
-  Downloaded cpufeatures v0.2.17
-  Downloaded tower-service v0.3.3
-  Downloaded zeroize v1.9.1
-  Downloaded toml_writer v1.1.3+spec-1.1.0
-  Downloaded alloc-no-stdlib v3.0.0
-  Downloaded cfg-if v1.0.5
-  Downloaded equivalent v1.0.3
-  Downloaded http-body v1.1.0
-  Downloaded percent-encoding v2.3.2
-  Downloaded windows-numerics v0.3.1
-  Downloaded rustc-hash v2.1.3
-  Downloaded windows-collections v0.3.2
-  Downloaded zerofrom v0.1.8
-  Downloaded zerofrom-derive v0.1.8
-  Downloaded web_atoms v0.2.6
-  Downloaded num-traits v0.2.19
+  Downloaded globset v0.4.20
   Downloaded dtoa v1.0.11
-  Downloaded siphasher v1.0.4
-  Downloaded winreg v0.56.0
-  Downloaded crossbeam-utils v0.8.23
-  Downloaded itoa v1.0.18
-  Downloaded new_debug_unreachable v1.0.6
-  Downloaded phf_codegen v0.13.1
+  Downloaded embed-resource v3.0.12
+  Downloaded find-msvc-tools v0.1.14
+  Downloaded tower-layer v0.3.3
+  Downloaded derive_more-impl v2.1.1
+  Downloaded getrandom v0.2.17
+  Downloaded tower-service v0.3.3
+  Downloaded alloc-no-stdlib v3.0.0
+  Downloaded cfg_aliases v0.2.2
+  Downloaded mime v0.3.17
+  Downloaded http-body v1.1.0
+  Downloaded http-body-util v0.1.5
+  Downloaded infer v0.22.0
+  Downloaded ipnet v2.12.2
+  Downloaded jobserver v0.1.35
+  Downloaded json-patch v4.2.0
+  Downloaded webview2-com-macros v0.8.1
+  Downloaded windows-threading v0.2.1
+  Downloaded hyper-rustls v0.27.10
+  Downloaded lock_api v0.4.14
+  Downloaded markup5ever v0.39.0
+  Downloaded phf v0.13.1
+  Downloaded toml_writer v1.1.3+spec-1.1.0
+  Downloaded crypto-common v0.1.7
+  Downloaded futures-channel v0.3.34
+  Downloaded ref-cast-impl v1.0.27
+  Downloaded erased-serde v0.4.10
+  Downloaded litemap v0.8.3
+  Downloaded parking_lot v0.12.5
+  Downloaded pkg-config v0.3.34
+  Downloaded getrandom v0.3.4
+  Downloaded httparse v1.10.1
+  Downloaded indexmap v1.9.3
+  Downloaded num-traits v0.2.19
+  Downloaded parking_lot_core v0.9.12
+  Downloaded getrandom v0.4.3
+  Downloaded icu_provider v2.3.1
+  Downloaded jiff-tzdb v0.1.9
+  Downloaded jsonptr v0.7.1
+  Downloaded log v0.4.34
+  Downloaded serialize-to-javascript v0.1.2
+  Downloaded subtle v2.6.1
+  Downloaded once_cell v1.21.4
+  Downloaded open v5.4.4
+  Downloaded cpufeatures v0.2.17
+  Downloaded zerofrom v0.1.8
+  Downloaded rustls-pki-types v1.15.1
+  Downloaded tinyvec v1.13.3
+  Downloaded toml v1.1.8+spec-1.1.0
+  Downloaded bit-set v0.8.0
+  Downloaded cfg-if v1.0.5
+  Downloaded cpufeatures v0.3.1
+  Downloaded flate2 v1.1.10
+  Downloaded miniz_oxide v0.8.9
+  Downloaded miniz_oxide v0.9.1
+  Downloaded slab v0.4.12
+  Downloaded version_check v0.9.5
+  Downloaded winapi-util v0.1.11
+  Downloaded derive_more v2.1.1
+  Downloaded dom_query v0.28.0
+  Downloaded ico v0.5.0
+  Downloaded icu_collections v2.3.0
+  Downloaded icu_locale_core v2.3.0
+  Downloaded plist v1.10.1
+  Downloaded quote v1.0.47
+  Downloaded ryu v1.0.23
+  Downloaded serde_with_macros v3.24.0
+  Downloaded smallvec v1.16.3
+  Downloaded tauri-build v2.7.3
+  Downloaded tauri-plugin-opener v2.7.2
+  Downloaded utf8_iter v1.0.4
+  Downloaded vswhom-sys v0.1.3
+  Downloaded windows-implement v0.60.2
   Downloaded windows-link v0.2.1
-  Downloaded form_urlencoded v1.2.2
-  Downloaded walkdir v2.5.0
-  Downloaded bitflags v1.3.2
-  Downloaded bs58 v0.5.1
-  Downloaded zmij v1.0.23
-  Downloaded autocfg v1.5.1
+  Downloaded windows-numerics v0.3.1
+  Downloaded cssparser-macros v0.7.1
+  Downloaded darling_macro v0.24.1
+  Downloaded hashbrown v0.12.3
+  Downloaded html5ever v0.39.0
+  Downloaded http v1.5.0
+  Downloaded icu_normalizer_data v2.3.0
+  Downloaded icu_properties v2.3.0
+  Downloaded indexmap v2.14.2
+  Downloaded jiff-core v0.1.1
+  Downloaded keyboard-types v0.8.3
+  Downloaded memchr v2.8.3
+  Downloaded mio v1.2.4
+  Downloaded muda v0.20.0
+  Downloaded rand v0.10.3
+  Downloaded rustc-hash v2.1.3
+  Downloaded rustls-webpki v0.103.15
+  Downloaded stable_deref_trait v1.2.1
+  Downloaded hashbrown v0.17.1
+  Downloaded hyper v1.12.0
+  Downloaded hyper-util v0.1.21
+  Downloaded idna v1.1.0
+  Downloaded rustc_version v0.4.1
+  Downloaded tower-http v0.6.11
+  Downloaded darling_core v0.24.1
+  Downloaded futures-util v0.3.34
+  Downloaded icu_properties_data v2.3.0
+  Downloaded atomic-waker v1.1.2
+  Downloaded proc-macro2 v1.0.107
+  Downloaded same-file v1.0.6
+  Downloaded serde_derive_internals v0.29.1
+  Downloaded windows-collections v0.3.2
+  Downloaded windows-interface v0.59.3
+  Downloaded alloc-stdlib v0.3.0
+  Downloaded block-buffer v0.10.4
+  Downloaded yoke-derive v0.8.4
+  Downloaded windows-targets v0.53.5
+  Downloaded windows-version v0.1.7
+  Downloaded cargo-platform v0.1.9
+  Downloaded potential_utf v0.1.6
+  Downloaded sync_wrapper v1.0.2
+  Downloaded zerofrom-derive v0.1.8
+  Downloaded precomputed-hash v0.1.1
+  Downloaded serde_core v1.0.229
+  Downloaded phf_shared v0.13.1
+  Downloaded powerfmt v0.2.1
+  Downloaded quinn-udp v0.5.16
+  Downloaded rfd v0.16.0
+  Downloaded socket2 v0.6.5
+  Downloaded windows-strings v0.5.1
+  Downloaded tokio-rustls v0.26.6
+  Downloaded try-lock v0.2.5
+  Downloaded web_atoms v0.2.6
+  Downloaded synstructure v0.14.0
+  Downloaded phf_macros v0.13.1
+  Downloaded pin-project-lite v0.2.17
+  Downloaded tokio-macros v2.7.2
   Downloaded bit-vec v0.8.0
   Downloaded cargo_metadata v0.19.2
-  Downloaded time-core v0.1.9
-  Downloaded crypto-common v0.1.7
-  Downloaded precomputed-hash v0.1.1
-  Downloaded slab v0.4.12
-  Downloaded tracing-core v0.1.36
-  Downloaded yoke v0.8.3
-  Downloaded cookie v0.18.2
-  Downloaded crc32fast v1.5.2
-  Downloaded defmt-macros v1.2.0
-  Downloaded futures-task v0.3.34
-  Downloaded globset v0.4.20
-  Downloaded serde_spanned v1.1.2
-  Downloaded camino v1.2.6
-  Downloaded cargo_toml v1.0.1
-  Downloaded chacha20 v0.10.2
-  Downloaded tray-icon v0.25.1
-  Downloaded bitflags v2.13.2
-  Downloaded serde_derive_internals v0.29.1
-  Downloaded smallvec v1.16.3
-  Downloaded windows-core v0.62.2
-  Downloaded ctor v1.0.13
-  Downloaded tauri-macros v2.7.3
-  Downloaded socket2 v0.6.5
-  Downloaded tauri-plugin v2.7.2
-  Downloaded tinystr v0.8.4
-  Downloaded tower v0.5.3
-  Downloaded uuid v1.28.0
-  Downloaded writeable v0.6.4
-  Downloaded anyhow v1.0.104
-  Downloaded schemars v0.8.22
-  Downloaded tauri-build v2.7.3
-  Downloaded tauri-codegen v2.7.3
-  Downloaded base64 v0.22.1
-  Downloaded bytes v1.12.1
-  Downloaded same-file v1.0.6
-  Downloaded tauri-plugin-log v2.10.1
-  Downloaded crossbeam-channel v0.5.17
-  Downloaded darling v0.24.1
-  Downloaded futures-sink v0.3.34
-  Downloaded jobserver v0.1.35
-  Downloaded num-conv v0.2.2
-  Downloaded option-ext v0.2.0
-  Downloaded typenum v1.20.1
-  Downloaded url v2.5.8
-  Downloaded cfb v0.14.0
-  Downloaded cssparser-macros v0.7.1
-  Downloaded zerotrie v0.2.5
-  Downloaded ref-cast v1.0.27
-  Downloaded schemars v0.9.0
-  Downloaded unicode-segmentation v1.13.3
-  Downloaded cc v1.8.0
-  Downloaded cssparser v0.37.0
-  Downloaded base64 v0.23.1
-  Downloaded defmt-parser v1.1.0
-  Downloaded lock_api v0.4.14
-  Downloaded rand_pcg v0.10.2
-  Downloaded unicode-normalization v0.1.26
-  Downloaded tauri-plugin-opener v2.7.2
-  Downloaded hex v0.4.3
-  Downloaded tokio-macros v2.7.2
-  Downloaded tower-http v0.6.11
-  Downloaded zerovec v0.11.8
-  Downloaded serialize-to-javascript-impl v0.1.2
-  Downloaded getrandom v0.2.17
-  Downloaded darling_macro v0.24.1
-  Downloaded erased-serde v0.4.10
-  Downloaded powerfmt v0.2.1
-  Downloaded rand v0.10.3
-  Downloaded raw-window-handle v0.6.2
-  Downloaded rustc_version v0.4.1
-  Downloaded scopeguard v1.2.0
-  Downloaded time-macros v0.2.32
-  Downloaded winnow v1.0.4
-  Downloaded aho-corasick v1.1.5
-  Downloaded serde_repr v0.1.21
-  Downloaded thiserror v2.0.21
-  Downloaded once_cell v1.21.4
-  Downloaded phf v0.13.1
-  Downloaded phf_macros v0.13.1
-  Downloaded wry v0.57.0
-  Downloaded vcpkg v0.2.15
-  Downloaded brotli-decompressor v6.0.1
-  Downloaded chrono v0.4.45
-  Downloaded json-patch v4.2.0
-  Downloaded miniz_oxide v0.9.1
-  Downloaded phf_shared v0.13.1
-  Downloaded quinn-udp v0.5.16
-  Downloaded static_vcruntime v3.0.0
-  Downloaded string_cache_codegen v0.6.1
-  Downloaded strsim v0.11.1
-  Downloaded tauri-runtime-wry v2.12.2
-  Downloaded tinyvec v1.13.3
-  Downloaded zlib-rs v0.6.8
+  Downloaded bs58 v0.5.1
+  Downloaded autocfg v1.5.1
+  Downloaded zerovec-derive v0.11.6
+  Downloaded bitflags v1.3.2
+  Downloaded rand_core v0.10.1
+  Downloaded serde_derive v1.0.229
+  Downloaded serde_json v1.0.154
+  Downloaded softbuffer v0.4.8
+  Downloaded web-time v1.1.0
+  Downloaded webview2-com v0.39.1
+  Downloaded zeroize v1.9.1
+  Downloaded walkdir v2.5.0
+  Downloaded windows-future v0.3.2
+  Downloaded windows-result v0.4.1
+  Downloaded zmij v1.0.23
+  Downloaded byteorder v1.5.0
   Downloaded quinn v0.11.12
   Downloaded serde-untagged v0.1.9
-  Downloaded serialize-to-javascript v0.1.2
-  Downloaded simd-adler32 v0.3.10
-  Downloaded webpki-roots v1.0.9
-  Downloaded litemap v0.8.3
-  Downloaded parking_lot_core v0.9.12
-  Downloaded pin-project-lite v0.2.17
-  Downloaded semver v1.0.28
-  Downloaded sha2 v0.10.9
-  Downloaded hashbrown v0.12.3
-  Downloaded defmt v1.2.0
-  Downloaded png v0.17.16
-  Downloaded servo_arc v0.4.3
-  Downloaded string_cache v0.9.0
-  Downloaded synstructure v0.14.0
-  Downloaded jiff-tzdb v0.1.9
-  Downloaded icu_locale_core v2.3.0
-  Downloaded pkg-config v0.3.34
-  Downloaded rustls-pki-types v1.15.1
-  Downloaded tendril v0.5.1
-  Downloaded log v0.4.34
-  Downloaded markup5ever v0.39.0
-  Downloaded parking_lot v0.12.5
-  Downloaded quote v1.0.47
-  Downloaded schemars_derive v0.8.22
-  Downloaded serde_json v1.0.154
-  Downloaded serde_urlencoded v0.7.1
-  Downloaded shlex v2.0.1
-  Downloaded sync_wrapper v1.0.2
-  Downloaded toml_datetime v1.1.2+spec-1.1.0
-  Downloaded miniz_oxide v0.8.9
-  Downloaded potential_utf v0.1.6
-  Downloaded rand_core v0.10.1
-  Downloaded rfd v0.16.0
-  Downloaded stable_deref_trait v1.2.1
-  Downloaded subtle v2.6.1
-  Downloaded tauri v2.12.4
   Downloaded tauri-winres v0.3.6
-  Downloaded darling_core v0.24.1
-  Downloaded mio v1.2.4
-  Downloaded ryu v1.0.23
-  Downloaded serde_core v1.0.229
-  Downloaded toml v1.1.8+spec-1.1.0
-  Downloaded bstr v1.13.1
-  Downloaded proc-macro2 v1.0.107
-  Downloaded serde v1.0.229
-  Downloaded serde_derive v1.0.229
-  Downloaded serde_with_macros v3.24.0
-  Downloaded jiff-core v0.1.1
+  Downloaded thiserror-impl v2.0.21
+  Downloaded deranged v0.5.9
+  Downloaded tracing-attributes v0.1.31
+  Downloaded anyhow v1.0.104
+  Downloaded windows-core v0.62.2
+  Downloaded crc32fast v1.5.2
+  Downloaded camino v1.2.6
+  Downloaded chacha20 v0.10.2
+  Downloaded crossbeam-utils v0.8.23
+  Downloaded tracing-core v0.1.36
+  Downloaded winreg v0.56.0
+  Downloaded yoke v0.8.3
+  Downloaded bitflags v2.13.2
+  Downloaded cargo_toml v1.0.1
+  Downloaded cssparser v0.37.0
+  Downloaded ctor v1.0.13
+  Downloaded git2 v0.21.0
+  Downloaded rand_pcg v0.10.2
+  Downloaded raw-window-handle v0.6.2
+  Downloaded ref-cast v1.0.27
+  Downloaded schemars v0.8.22
+  Downloaded serde_repr v0.1.21
+  Downloaded serde_spanned v1.1.2
+  Downloaded serde_urlencoded v0.7.1
   Downloaded serde_with v3.24.0
+  Downloaded serialize-to-javascript-impl v0.1.2
+  Downloaded servo_arc v0.4.3
+  Downloaded siphasher v1.0.4
+  Downloaded static_vcruntime v3.0.0
+  Downloaded string_cache_codegen v0.6.1
+  Downloaded tauri-codegen v2.7.3
+  Downloaded tauri-plugin v2.7.2
+  Downloaded tendril v0.5.1
+  Downloaded thiserror v2.0.21
+  Downloaded tray-icon v0.25.1
+  Downloaded unicode-ident v1.0.27
+  Downloaded urlpattern v0.6.0
+  Downloaded writeable v0.6.4
+  Downloaded defmt v1.2.0
+  Downloaded defmt-parser v1.1.0
+  Downloaded png v0.18.1
+  Downloaded schemars_derive v0.8.22
+  Downloaded semver v1.0.28
+  Downloaded tauri-plugin-log v2.10.1
+  Downloaded tauri-runtime v2.12.2
+  Downloaded uuid v1.28.0
+  Downloaded bytes v1.12.1
+  Downloaded cookie v0.18.2
+  Downloaded fern v0.7.1
+  Downloaded png v0.17.16
   Downloaded quick-xml v0.42.0
   Downloaded schemars v1.2.3
   Downloaded selectors v0.38.0
-  Downloaded tauri-plugin-dialog v2.8.3
-  Downloaded toml_parser v1.1.5+spec-1.1.0
-  Downloaded deranged v0.5.9
-  Downloaded memchr v2.8.3
-  Downloaded muda v0.20.0
-  Downloaded plist v1.10.1
-  Downloaded rustls-webpki v0.103.15
-  Downloaded softbuffer v0.4.8
   Downloaded tauri-plugin-fs v2.7.1
-  Downloaded thiserror-impl v2.0.21
-  Downloaded tokio-rustls v0.26.6
-  Downloaded futures-util v0.3.34
-  Downloaded hyper-util v0.1.21
-  Downloaded idna v1.1.0
-  Downloaded ref-cast-impl v1.0.27
+  Downloaded base64 v0.22.1
+  Downloaded base64 v0.23.1
+  Downloaded cfb v0.14.0
+  Downloaded scopeguard v1.2.0
+  Downloaded shlex v2.0.1
+  Downloaded string_cache v0.9.0
+  Downloaded strsim v0.11.1
+  Downloaded time-core v0.1.9
+  Downloaded tinystr v0.8.4
+  Downloaded typenum v1.20.1
+  Downloaded unicode-segmentation v1.13.3
+  Downloaded url v2.5.8
+  Downloaded zerotrie v0.2.5
+  Downloaded darling v0.24.1
+  Downloaded defmt-macros v1.2.0
+  Downloaded reqwest v0.12.28
+  Downloaded sha2 v0.10.9
+  Downloaded simd-adler32 v0.3.10
+  Downloaded tauri v2.12.4
+  Downloaded tauri-macros v2.7.3
+  Downloaded tauri-plugin-dialog v2.8.3
+  Downloaded tauri-runtime-wry v2.12.2
+  Downloaded time-macros v0.2.32
+  Downloaded toml_datetime v1.1.2+spec-1.1.0
+  Downloaded toml_parser v1.1.5+spec-1.1.0
+  Downloaded cc v1.8.0
+  Downloaded crossbeam-channel v0.5.17
   Downloaded tauri-utils v2.10.2
-  Downloaded icu_properties_data v2.3.0
-  Downloaded png v0.18.1
+  Downloaded unicode-normalization v0.1.26
+  Downloaded zerovec v0.11.8
+  Downloaded schemars v0.9.0
   Downloaded quinn-proto v0.11.19
   Downloaded regex v1.13.1
-  Downloaded tauri-runtime v2.12.2
-  Downloaded tracing v0.1.44
-  Downloaded reqwest v0.12.28
-  Downloaded time v0.3.55
-  Downloaded fern v0.7.1
-  Downloaded syn v2.0.119
-  Downloaded syn v3.0.9
+  Downloaded serde v1.0.229
+  Downloaded aho-corasick v1.1.5
+  Downloaded tower v0.5.3
+  Downloaded winnow v1.0.4
+  Downloaded wry v0.57.0
+  Downloaded zlib-rs v0.6.8
+  Downloaded vcpkg v0.2.15
+  Downloaded webpki-roots v1.0.9
+  Downloaded brotli-decompressor v6.0.1
+  Downloaded chrono v0.4.45
+  Downloaded icu_normalizer v2.3.0
   Downloaded tao v0.37.1
-  Downloaded regex-syntax v0.8.11
+  Downloaded time v0.3.55
   Downloaded rustls v0.23.46
+  Downloaded regex-syntax v0.8.11
+  Downloaded syn v3.0.9
+  Downloaded bstr v1.13.1
+  Downloaded syn v2.0.119
   Downloaded jiff v0.2.38
+  Downloaded tracing v0.1.44
+  Downloaded libz-sys v1.1.30
   Downloaded regex-automata v0.4.18
   Downloaded libc v0.2.191
-  Downloaded tokio v1.53.3
-  Downloaded libz-sys v1.1.30
   Downloaded brotli v9.0.0
-  Downloaded libgit2-sys v0.18.8+1.9.7
+  Downloaded tokio v1.53.3
   Downloaded windows_x86_64_msvc v0.53.1
-  Downloaded window-vibrancy v0.8.1
   Downloaded ring v0.17.14
+  Downloaded window-vibrancy v0.8.1
+  Downloaded libgit2-sys v0.18.8+1.9.7
   Downloaded windows-sys v0.60.2
   Downloaded windows-sys v0.61.2
   Downloaded webview2-com-sys v0.39.1
   Downloaded windows v0.62.2
    Compiling proc-macro2 v1.0.107
-   Compiling unicode-ident v1.0.27
    Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.27
    Compiling cfg-if v1.0.5
    Compiling getrandom v0.4.3
    Compiling serde_core v1.0.229
@@ -342,24 +342,22 @@
    Compiling zmij v1.0.23
    Compiling jobserver v0.1.35
    Compiling smallvec v1.16.3
-   Compiling thiserror v2.0.21
-   Compiling find-msvc-tools v0.1.14
    Compiling shlex v2.0.1
+   Compiling find-msvc-tools v0.1.14
+   Compiling thiserror v2.0.21
    Compiling cc v1.8.0
    Compiling synstructure v0.14.0
-   Compiling serde v1.0.229
    Compiling parking_lot_core v0.9.12
+   Compiling serde v1.0.229
    Compiling memchr v2.8.3
-   Compiling typeid v1.0.3
    Compiling time-core v0.1.9
    Compiling num-conv v0.2.2
-   Compiling phf_codegen v0.13.1
-   Compiling ident_case v1.0.1
+   Compiling typeid v1.0.3
    Compiling phf_macros v0.13.1
+   Compiling phf_codegen v0.13.1
    Compiling litemap v0.8.3
-   Compiling itoa v1.0.18
-   Compiling writeable v0.6.4
    Compiling strsim v0.11.1
+   Compiling itoa v1.0.18
    Compiling zerofrom-derive v0.1.8
    Compiling yoke-derive v0.8.4
    Compiling zerovec-derive v0.11.6
@@ -369,47 +367,49 @@
    Compiling zerofrom v0.1.8
    Compiling yoke v0.8.3
    Compiling zerovec v0.11.8
-   Compiling zerotrie v0.2.5
+   Compiling writeable v0.6.4
    Compiling tinystr v0.8.4
-   Compiling potential_utf v0.1.6
-   Compiling icu_locale_core v2.3.0
+   Compiling ident_case v1.0.1
    Compiling darling_core v0.24.1
+   Compiling icu_locale_core v2.3.0
+   Compiling potential_utf v0.1.6
+   Compiling zerotrie v0.2.5
    Compiling windows-sys v0.61.2
    Compiling autocfg v1.5.1
    Compiling erased-serde v0.4.10
    Compiling utf8_iter v1.0.4
    Compiling icu_collections v2.3.0
    Compiling icu_provider v2.3.1
-   Compiling scopeguard v1.2.0
    Compiling new_debug_unreachable v1.0.6
+   Compiling scopeguard v1.2.0
    Compiling libc v0.2.191
    Compiling lock_api v0.4.14
    Compiling phf v0.13.1
    Compiling string_cache_codegen v0.6.1
-   Compiling anyhow v1.0.104
    Compiling serde_json v1.0.154
+   Compiling anyhow v1.0.104
+   Compiling darling_macro v0.24.1
    Compiling precomputed-hash v0.1.1
    Compiling web_atoms v0.2.6
    Compiling icu_normalizer v2.3.0
-   Compiling darling_macro v0.24.1
    Compiling darling v0.24.1
-   Compiling icu_properties v2.3.0
    Compiling serde_with_macros v3.24.0
+   Compiling icu_properties v2.3.0
    Compiling parking_lot v0.12.5
    Compiling semver v1.0.28
    Compiling winnow v1.0.4
    Compiling toml_parser v1.1.5+spec-1.1.0
    Compiling idna_adapter v1.2.2
    Compiling string_cache v0.9.0
-   Compiling serde_spanned v1.1.2
    Compiling toml_datetime v1.1.2+spec-1.1.0
-   Compiling toml_writer v1.1.3+spec-1.1.0
-   Compiling percent-encoding v2.3.2
-   Compiling log v0.4.34
+   Compiling serde_spanned v1.1.2
    Compiling dtoa v1.0.11
-   Compiling dtoa-short v0.3.5
-   Compiling form_urlencoded v1.2.2
+   Compiling log v0.4.34
+   Compiling percent-encoding v2.3.2
+   Compiling toml_writer v1.1.3+spec-1.1.0
    Compiling toml v1.1.8+spec-1.1.0
+   Compiling form_urlencoded v1.2.2
+   Compiling dtoa-short v0.3.5
    Compiling idna v1.1.0
    Compiling tendril v0.5.1
    Compiling indexmap v1.9.3
@@ -419,9 +419,9 @@
    Compiling aho-corasick v1.1.5
    Compiling uuid v1.28.0
    Compiling version_check v0.9.5
-   Compiling alloc-no-stdlib v3.0.0
-   Compiling regex-syntax v0.8.11
    Compiling bitflags v2.13.2
+   Compiling regex-syntax v0.8.11
+   Compiling alloc-no-stdlib v3.0.0
    Compiling camino v1.2.6
    Compiling alloc-stdlib v0.3.0
    Compiling derive_more v2.1.1
@@ -431,43 +431,43 @@
    Compiling winapi-util v0.1.11
    Compiling serde_derive_internals v0.29.1
    Compiling servo_arc v0.4.3
-   Compiling regex-automata v0.4.18
-   Compiling hashbrown v0.17.1
-   Compiling fnv v1.0.7
-   Compiling rustc-hash v2.1.3
-   Compiling hashbrown v0.12.3
    Compiling web-time v1.1.0
-   Compiling bit-vec v0.8.0
-   Compiling powerfmt v0.2.1
-   Compiling schemars v0.8.22
-   Compiling deranged v0.5.9
+   Compiling hashbrown v0.17.1
    Compiling equivalent v1.0.3
-   Compiling indexmap v2.14.2
-   Compiling bit-set v0.8.0
+   Compiling deranged v0.5.9
+   Compiling regex-automata v0.4.18
+   Compiling schemars v0.8.22
+   Compiling powerfmt v0.2.1
+   Compiling rustc-hash v2.1.3
+   Compiling bit-vec v0.8.0
+   Compiling fnv v1.0.7
+   Compiling hashbrown v0.12.3
    Compiling cfb v0.14.0
    Compiling time v0.3.55
-   Compiling regex v1.13.1
+   Compiling bit-set v0.8.0
    Compiling schemars_derive v0.8.22
+   Compiling regex v1.13.1
+   Compiling indexmap v2.14.2
    Compiling same-file v1.0.6
    Compiling html5ever v0.39.0
    Compiling brotli-decompressor v6.0.1
    Compiling jsonptr v0.7.1
    Compiling cargo-platform v0.1.9
    Compiling quick-xml v0.42.0
-   Compiling foldhash v0.2.0
+   Compiling base64 v0.23.1
    Compiling tauri-utils v2.10.2
    Compiling bytes v1.12.1
-   Compiling dunce v1.0.5
+   Compiling foldhash v0.2.0
    Compiling dyn-clone v1.0.20
-   Compiling base64 v0.23.1
+   Compiling dunce v1.0.5
    Compiling plist v1.10.1
    Compiling http v1.5.0
-   Compiling brotli v9.0.0
    Compiling dom_query v0.28.0
+   Compiling brotli v9.0.0
    Compiling json-patch v4.2.0
    Compiling cargo_metadata v0.19.2
-   Compiling walkdir v2.5.0
    Compiling serde-untagged v0.1.9
+   Compiling walkdir v2.5.0
    Compiling urlpattern v0.6.0
    Compiling infer v0.22.0
    Compiling serde_with v3.24.0
@@ -478,10 +478,10 @@
     Checking pin-project-lite v0.2.17
    Compiling winreg v0.56.0
    Compiling rustc_version v0.4.1
-   Compiling windows-interface v0.59.3
    Compiling windows-implement v0.60.2
-    Checking windows-strings v0.5.1
+   Compiling windows-interface v0.59.3
     Checking windows-result v0.4.1
+    Checking windows-strings v0.5.1
     Checking once_cell v1.21.4
    Compiling option-ext v0.2.0
    Compiling dirs-sys v0.5.0
@@ -490,23 +490,23 @@
    Compiling dirs v7.0.0
    Compiling cargo_toml v1.0.1
    Compiling simd-adler32 v0.3.10
-   Compiling vswhom v0.1.0
-   Compiling embed-resource v3.0.12
    Compiling static_vcruntime v3.0.0
-   Compiling tauri-winres v0.3.6
     Checking mio v1.2.4
     Checking socket2 v0.6.5
    Compiling tokio-macros v2.7.2
     Checking windows-threading v0.2.1
    Compiling crc32fast v1.5.2
+   Compiling vswhom v0.1.0
    Compiling adler2 v2.0.1
-    Checking tokio v1.53.3
+   Compiling embed-resource v3.0.12
     Checking windows-future v0.3.2
-    Checking windows-collections v0.3.2
+   Compiling tauri-winres v0.3.6
+    Checking tokio v1.53.3
     Checking windows-numerics v0.3.1
-   Compiling time-macros v0.2.32
-   Compiling tauri-build v2.7.3
    Compiling tauri-plugin v2.7.2
+   Compiling tauri-build v2.7.3
+    Checking windows-collections v0.3.2
+   Compiling time-macros v0.2.32
    Compiling typenum v1.20.1
     Checking raw-window-handle v0.6.2
     Checking windows v0.62.2
@@ -514,37 +514,37 @@
     Checking tracing-core v0.1.36
    Compiling webview2-com-sys v0.39.1
    Compiling crossbeam-utils v0.8.23
-   Compiling flate2 v1.1.10
     Checking tracing v0.1.44
+   Compiling flate2 v1.1.10
    Compiling miniz_oxide v0.8.9
    Compiling fdeflate v0.3.7
     Checking dpi v0.1.2
    Compiling cookie v0.18.2
     Checking futures-core v0.3.34
-   Compiling block-buffer v0.10.4
+   Compiling tauri v2.12.4
    Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
    Compiling webview2-com-macros v0.8.1
     Checking windows-version v0.1.7
    Compiling bitflags v1.3.2
    Compiling png v0.17.16
-   Compiling tauri v2.12.4
    Compiling digest v0.10.7
     Checking crossbeam-channel v0.5.17
    Compiling ring v0.17.14
-   Compiling cpufeatures v0.2.17
    Compiling wry v0.57.0
-   Compiling byteorder v1.5.0
    Compiling tauri-runtime v2.12.2
-   Compiling ico v0.5.0
+   Compiling byteorder v1.5.0
+   Compiling cpufeatures v0.2.17
    Compiling sha2 v0.10.9
+   Compiling ico v0.5.0
    Compiling png v0.18.1
    Compiling tauri-runtime-wry v2.12.2
     Checking unicode-segmentation v1.13.3
    Compiling pkg-config v0.3.34
-   Compiling muda v0.20.0
+   Compiling getrandom v0.3.4
     Checking zeroize v1.9.1
     Checking futures-sink v0.3.34
-   Compiling getrandom v0.3.4
+   Compiling muda v0.20.0
     Checking rustls-pki-types v1.15.1
    Compiling tauri-codegen v2.7.3
     Checking softbuffer v0.4.8
@@ -552,43 +552,43 @@
     Checking http-body v1.1.0
     Checking getrandom v0.2.17
    Compiling serialize-to-javascript-impl v0.1.2
-    Checking untrusted v0.9.0
-    Checking slab v0.4.12
     Checking futures-io v0.3.34
-   Compiling windows_x86_64_msvc v0.53.1
-   Compiling vcpkg v0.2.15
-   Compiling httparse v1.10.1
     Checking futures-task v0.3.34
+    Checking slab v0.4.12
+   Compiling vcpkg v0.2.15
+   Compiling windows_x86_64_msvc v0.53.1
+    Checking untrusted v0.9.0
+   Compiling httparse v1.10.1
    Compiling tauri-macros v2.7.3
-    Checking futures-util v0.3.34
    Compiling libz-sys v1.1.30
     Checking serialize-to-javascript v0.1.2
-   Compiling tauri-plugin-fs v2.7.1
+    Checking futures-util v0.3.34
     Checking window-vibrancy v0.8.1
+   Compiling tauri-plugin-fs v2.7.1
    Compiling serde_repr v0.1.21
-    Checking mime v0.3.17
     Checking try-lock v0.2.5
     Checking tower-service v0.3.3
    Compiling rustls v0.23.46
+    Checking mime v0.3.17
     Checking want v0.3.2
     Checking rustls-webpki v0.103.15
     Checking atomic-waker v1.1.2
     Checking subtle v2.6.1
     Checking hyper v1.12.0
     Checking windows-targets v0.53.5
-   Compiling libgit2-sys v0.18.8+1.9.7
     Checking futures-channel v0.3.34
+   Compiling libgit2-sys v0.18.8+1.9.7
    Compiling tauri-plugin-log v2.10.1
-   Compiling tauri-plugin-dialog v2.8.3
    Compiling tauri-plugin-opener v2.7.2
+   Compiling tauri-plugin-dialog v2.8.3
     Checking sync_wrapper v1.0.2
    Compiling num-traits v0.2.19
-   Compiling rfd v0.16.0
     Checking tower-layer v0.3.3
+   Compiling rfd v0.16.0
     Checking ipnet v2.12.2
-    Checking tokio-rustls v0.26.6
-    Checking hyper-util v0.1.21
     Checking tower v0.5.3
+    Checking hyper-util v0.1.21
+    Checking tokio-rustls v0.26.6
     Checking windows-sys v0.60.2
     Checking webpki-roots v1.0.9
     Checking ryu v1.0.23
@@ -600,58 +600,21 @@
     Checking open v5.4.4
     Checking fern v0.7.1
     Checking bstr v1.13.1
-    Checking tinyvec v1.13.3
     Checking base64 v0.22.1
-    Checking unicode-normalization v0.1.26
+    Checking tinyvec v1.13.3
     Checking reqwest v0.12.28
+    Checking unicode-normalization v0.1.26
     Checking globset v0.4.20
     Checking chrono v0.4.45
     Checking dirs v6.0.0
     Checking tao v0.37.1
     Checking webview2-com v0.39.1
     Checking git2 v0.21.0
-error[E0432]: unresolved import `git2::DeltaType`
-  --> src\gitmod.rs:10:24
-   |
-10 | use git2::{BranchType, DeltaType, DiffFlags, DiffOptions, FileMode, Repository, Sort, StatusOptions};
-   |                        ^^^^^^^^^ no `DeltaType` in the root
-
-error[E0106]: missing lifetime specifier
-  --> src\report.rs:41:45
-   |
-41 | fn t(en: &str, fa: &str, lang: Language) -> &str {
-   |          ----      ----                     ^ expected named lifetime parameter
-   |
-   = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `en` or `fa`
-help: consider introducing a named lifetime parameter
-   |
-41 | fn t<'a>(en: &'a str, fa: &'a str, lang: Language) -> &'a str {
-   |     ++++      ++           ++                          ++
-
-warning: unused import: `Manager`
-  --> src\commands.rs:15:33
-   |
-15 | use tauri::{AppHandle, Emitter, Manager, State};
-   |                                 ^^^^^^^
-   |
-   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
-
-error[E0308]: mismatched types
-  --> src\gitmod.rs:53:27
-   |
-53 |             info.branch = head.shorthand().map(|s| s.to_string());
-   |             -----------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Option<String>`, found `Result<String, Error>`
-   |             |
-   |             expected due to the type of this binding
-   |
-   = note: expected enum `std::option::Option<std::string::String>`
-              found enum `Result<std::string::String, git2::Error>`
-
 error[E0599]: the method `to_string` exists for enum `std::option::Option<&str>`, but its trait bounds were not satisfied
-  --> src\gitmod.rs:56:64
+  --> src\gitmod.rs:96:71
    |
-56 |                 info.head_subject = commit.summary().map(|s| s.to_string());
-   |                                                                ^^^^^^^^^ method cannot be called on `std::option::Option<&str>` due to unsatisfied trait bounds
+96 |         info.remotes = remotes.iter().filter_map(|r| r.ok().map(|s| s.to_string())).collect();
+   |                                                                       ^^^^^^^^^ method cannot be called on `std::option::Option<&str>` due to unsatisfied trait bounds
    |
    = note: the following trait bounds were not satisfied:
            `std::option::Option<&str>: std::fmt::Display`
@@ -660,194 +623,10 @@ note: the method `to_string` exists on the type `&str`
   --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library\alloc\src\string.rs:2917:4
 help: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`
    |
-56 |                 info.head_subject = commit.summary().map(|s| s.expect("REASON").to_string());
-   |                                                               +++++++++++++++++
+96 |         info.remotes = remotes.iter().filter_map(|r| r.ok().map(|s| s.expect("REASON").to_string())).collect();
+   |                                                                      +++++++++++++++++
 
-error[E0599]: the method `to_string` exists for enum `std::option::Option<&str>`, but its trait bounds were not satisfied
-  --> src\gitmod.rs:96:59
-   |
-96 |         info.remotes = remotes.iter().flatten().map(|s| s.to_string()).collect();
-   |                                                           ^^^^^^^^^ method cannot be called on `std::option::Option<&str>` due to unsatisfied trait bounds
-   |
-   = note: the following trait bounds were not satisfied:
-           `std::option::Option<&str>: std::fmt::Display`
-           which is required by `std::option::Option<&str>: ToString`
-note: the method `to_string` exists on the type `&str`
-  --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library\alloc\src\string.rs:2917:4
-help: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`
-   |
-96 |         info.remotes = remotes.iter().flatten().map(|s| s.expect("REASON").to_string()).collect();
-   |                                                          +++++++++++++++++
-
-error[E0599]: the method `to_string` exists for enum `std::option::Option<&str>`, but its trait bounds were not satisfied
-   --> src\gitmod.rs:122:59
-    |
-122 |             subject: commit.summary().unwrap_or_default().to_string(),
-    |                                                           ^^^^^^^^^ method cannot be called on `std::option::Option<&str>` due to unsatisfied trait bounds
-    |
-    = note: the following trait bounds were not satisfied:
-            `std::option::Option<&str>: std::fmt::Display`
-            which is required by `std::option::Option<&str>: ToString`
-note: the method `to_string` exists on the type `&str`
-   --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library\alloc\src\string.rs:2917:4
-help: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`
-    |
-122 |             subject: commit.summary().unwrap_or_default().expect("REASON").to_string(),
-    |                                                          +++++++++++++++++
-
-error[E0599]: no method named `diff_head_to_index` found for reference `&git2::Repository` in the current scope
-    --> src\gitmod.rs:160:34
-     |
- 160 |         ScanBase::Staged => repo.diff_head_to_index(None, Some(&mut opts))?,
-     |                                  ^^^^^^^^^^^^^^^^^^
-     |
-help: there is a method `diff_tree_to_index` with a similar name, but with different arguments
-    --> C:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\git2-0.21.0\src\repo.rs:2908:5
-     |
-2908 | /     pub fn diff_tree_to_index(
-2909 | |         &self,
-2910 | |         old_tree: Option<&Tree<'_>>,
-2911 | |         index: Option<&Index>,
-2912 | |         opts: Option<&mut DiffOptions>,
-2913 | |     ) -> Result<Diff<'_>, Error> {
-     | |________________________________^
-
-error[E0599]: no method named `num_hunks` found for enum `std::option::Option<T>` in the current scope
-   --> src\gitmod.rs:243:40
-    |
-243 |                 let hunk_count = patch.num_hunks();
-    |                                        ^^^^^^^^^ method not found in `std::option::Option<git2::Patch<'_>>`
-    |
-note: the method `num_hunks` exists on the type `git2::Patch<'_>`
-   --> C:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\git2-0.21.0\src\patch.rs:133:5
-    |
-133 |     pub fn num_hunks(&self) -> usize {
-    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-help: consider using `Option::expect` to unwrap the `git2::Patch<'_>` value, panicking if the value is an `Option::None`
-    |
-243 |                 let hunk_count = patch.expect("REASON").num_hunks();
-    |                                       +++++++++++++++++
-
-error[E0599]: no method named `get_hunk` found for enum `std::option::Option<T>` in the current scope
-   --> src\gitmod.rs:245:54
-    |
-245 |                     let (hunk, _range) = match patch.get_hunk(h) {
-    |                                                      ^^^^^^^^ method not found in `std::option::Option<git2::Patch<'_>>`
-
-error[E0599]: no method named `num_lines_in_hunk` found for enum `std::option::Option<T>` in the current scope
-   --> src\gitmod.rs:251:44
-    |
-251 |                     let line_count = patch.num_lines_in_hunk(h).unwrap_or(0);
-    |                                            ^^^^^^^^^^^^^^^^^ method not found in `std::option::Option<git2::Patch<'_>>`
-    |
-note: the method `num_lines_in_hunk` exists on the type `git2::Patch<'_>`
-   --> C:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\git2-0.21.0\src\patch.rs:166:5
-    |
-166 |     pub fn num_lines_in_hunk(&self, hunk_idx: usize) -> Result<usize, Error> {
-    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-help: consider using `Option::expect` to unwrap the `git2::Patch<'_>` value, panicking if the value is an `Option::None`
-    |
-251 |                     let line_count = patch.expect("REASON").num_lines_in_hunk(h).unwrap_or(0);
-    |                                           +++++++++++++++++
-
-error[E0599]: no method named `get_line_in_hunk` found for enum `std::option::Option<T>` in the current scope
-   --> src\gitmod.rs:253:66
-    |
-253 |                         let (line, old_no, new_no) = match patch.get_line_in_hunk(h, l) {
-    |                                                                  ^^^^^^^^^^^^^^^^ method not found in `std::option::Option<git2::Patch<'_>>`
-
-error[E0277]: the trait bound `models::RiskBand: std::default::Default` is not satisfied
-   --> src\models.rs:495:5
-    |
-487 | #[derive(Debug, Clone, Serialize, Deserialize, Default)]
-    |                                                ------- in this derive macro expansion
-...
-495 |     pub risk_band: RiskBand,
-    |     ^^^^^^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `models::RiskBand`
-    |
-help: consider annotating `models::RiskBand` with `#[derive(Default)]`
-    |
-458 + #[derive(Default)]
-459 | pub enum RiskBand {
-    |
-
-error[E0277]: the trait bound `models::Verdict: std::default::Default` is not satisfied
-   --> src\models.rs:496:5
-    |
-487 | #[derive(Debug, Clone, Serialize, Deserialize, Default)]
-    |                                                ------- in this derive macro expansion
-...
-496 |     pub verdict: Verdict,
-    |     ^^^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `models::Verdict`
-    |
-help: consider annotating `models::Verdict` with `#[derive(Default)]`
-    |
-468 + #[derive(Default)]
-469 | pub enum Verdict {
-    |
-
-error[E0277]: the trait bound `models::Severity: std::default::Default` is not satisfied
-   --> src\models.rs:538:5
-    |
-533 | #[derive(Debug, Clone, Serialize, Deserialize, Default)]
-    |                                                ------- in this derive macro expansion
-...
-538 |     pub severity: Severity,
-    |     ^^^^^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `models::Severity`
-    |
-help: consider annotating `models::Severity` with `#[derive(Default)]`
-    |
- 13 + #[derive(Default)]
- 14 | pub enum Severity {
-    |
-
-error[E0597]: `changes` does not live long enough
-  --> src\commands.rs:74:8
-   |
-73 |     let mut changes = gitmod::build_changes(&repo, &base, true, 6, 4_000_000, Some(&file))?;
-   |         ----------- binding `changes` declared here
-74 |     Ok(changes.drain(..).next())
-   |        ^^^^^^^----------
-   |        |
-   |        borrowed value does not live long enough
-   |        a temporary with access to the borrow is created here ...
-75 | }
-   | -
-   | |
-   | `changes` dropped here while still borrowed
-   | ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `std::vec::Drain`
-   |
-   = note: the temporary is part of an expression at the end of a block;
-           consider forcing this temporary to be dropped sooner, before the block's local variables are dropped
-help: for example, you could save the expression's value in a new local variable `x` and then make `x` be the expression at the end of the block
-   |
-74 |     let x = Ok(changes.drain(..).next()); x
-   |     +++++++                             +++
-
-error[E0505]: cannot move out of `options` because it is borrowed
-   --> src\scanner.rs:144:9
-    |
- 44 |     options: ScanOptions,
-    |     ------- binding `options` declared here
-...
- 79 |         options: &options,
-    |                  -------- borrow of `options` occurs here
-...
-144 |         options,
-    |         ^^^^^^^ move out of `options` occurs here
-...
-149 |         warnings: ctx.warnings.clone(),
-    |                   ------------ borrow later used here
-    |
-help: consider cloning the value if the performance cost is acceptable
-    |
- 79 |         options: &options.clone(),
-    |                          ++++++++
-
-Some errors have detailed explanations: E0106, E0277, E0308, E0432, E0505, E0597, E0599.
-For more information about an error, try `rustc --explain E0106`.
-warning: `agentguard-desktop` (lib) generated 1 warning (1 duplicate)
-error: could not compile `agentguard-desktop` (lib) due to 16 previous errors; 1 warning emitted
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `agentguard-desktop` (lib) due to 1 previous error
 warning: build failed, waiting for other jobs to finish...
-warning: `agentguard-desktop` (lib test) generated 1 warning
-error: could not compile `agentguard-desktop` (lib test) due to 16 previous errors; 1 warning emitted
+error: could not compile `agentguard-desktop` (lib test) due to 1 previous error
