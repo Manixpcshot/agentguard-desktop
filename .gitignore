@@ -48,3 +48,8 @@ coverage/
 # Python bytecode
 __pycache__/
 *.py[cod]
+
+# CI debug logs (pushed by the workflow, deleted before merge)
+ci-logs/
+ci-check.log
+ci-test.log
