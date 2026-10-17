@@ -1,0 +1,224 @@
+[1m[92m   Compiling[0m serde_core v1.0.229
+[1m[92m   Compiling[0m pin-project-lite v0.2.17
+[1m[92m   Compiling[0m futures-core v0.3.34
+[1m[92m   Compiling[0m futures-io v0.3.34
+[1m[92m   Compiling[0m glib-sys v0.18.1
+[1m[92m   Compiling[0m smallvec v1.16.3
+[1m[92m   Compiling[0m slab v0.4.12
+[1m[92m   Compiling[0m futures-sink v0.3.34
+[1m[92m   Compiling[0m futures-task v0.3.34
+[1m[92m   Compiling[0m futures-channel v0.3.34
+[1m[92m   Compiling[0m gobject-sys v0.18.0
+[1m[92m   Compiling[0m futures-util v0.3.34
+[1m[92m   Compiling[0m stable_deref_trait v1.2.1
+[1m[92m   Compiling[0m yoke v0.8.3
+[1m[92m   Compiling[0m gio-sys v0.18.1
+[1m[92m   Compiling[0m thiserror v1.0.69
+[1m[92m   Compiling[0m zerovec v0.11.8
+[1m[92m   Compiling[0m pango-sys v0.18.0
+[1m[92m   Compiling[0m gdk-pixbuf-sys v0.18.0
+[1m[92m   Compiling[0m cairo-sys-rs v0.18.2
+[1m[92m   Compiling[0m gdk-sys v0.18.2
+[1m[92m   Compiling[0m tinystr v0.8.4
+[1m[92m   Compiling[0m icu_locale_core v2.3.0
+[1m[92m   Compiling[0m potential_utf v0.1.6
+[1m[92m   Compiling[0m zerotrie v0.2.5
+[1m[92m   Compiling[0m bitflags v2.13.2
+[1m[92m   Compiling[0m serde v1.0.229
+[1m[92m   Compiling[0m percent-encoding v2.3.2
+[1m[92m   Compiling[0m icu_collections v2.3.0
+[1m[92m   Compiling[0m crossbeam-utils v0.8.23
+[1m[92m   Compiling[0m icu_provider v2.3.1
+[1m[92m   Compiling[0m futures-executor v0.3.34
+[1m[92m   Compiling[0m errno v0.3.14
+[1m[92m   Compiling[0m signal-hook-registry v1.4.8
+[1m[92m   Compiling[0m glib v0.18.5
+[1m[92m   Compiling[0m atk-sys v0.18.2
+[1m[92m   Compiling[0m icu_normalizer v2.3.0
+[1m[92m   Compiling[0m icu_properties v2.3.0
+[1m[92m   Compiling[0m gtk-sys v0.18.2
+[1m[92m   Compiling[0m form_urlencoded v1.2.2
+[1m[92m   Compiling[0m log v0.4.34
+[1m[92m   Compiling[0m memoffset v0.9.1
+[1m[92m   Compiling[0m socket2 v0.6.5
+[1m[92m   Compiling[0m idna_adapter v1.2.2
+[1m[92m   Compiling[0m idna v1.1.0
+[1m[92m   Compiling[0m mio v1.2.4
+[1m[92m   Compiling[0m parking v2.2.1
+[1m[92m   Compiling[0m tokio v1.53.3
+[1m[92m   Compiling[0m url v2.5.8
+[1m[92m   Compiling[0m field-offset v0.3.6
+[1m[92m   Compiling[0m serde_json v1.0.154
+[1m[92m   Compiling[0m aho-corasick v1.1.5
+[1m[92m   Compiling[0m num_threads v0.1.8
+[1m[92m   Compiling[0m time v0.3.55
+[1m[92m   Compiling[0m regex-automata v0.4.18
+[1m[92m   Compiling[0m gio v0.18.4
+[1m[92m   Compiling[0m cairo-rs v0.18.5
+[1m[92m   Compiling[0m atk v0.18.2
+[1m[92m   Compiling[0m soup3-sys v0.5.0
+[1m[92m   Compiling[0m javascriptcore-rs-sys v1.1.1
+[1m[92m   Compiling[0m uuid v1.28.0
+[1m[92m   Compiling[0m x11 v2.21.0
+[1m[92m   Compiling[0m dpi v0.1.2
+[1m[92m   Compiling[0m raw-window-handle v0.6.2
+[1m[92m   Compiling[0m cfb v0.14.0
+[1m[92m   Compiling[0m gdkx11-sys v0.18.2
+[1m[92m   Compiling[0m javascriptcore-rs v1.1.2
+[1m[92m   Compiling[0m webkit2gtk-sys v2.0.2
+[1m[92m   Compiling[0m regex v1.13.1
+[1m[92m   Compiling[0m jsonptr v0.7.1
+[1m[92m   Compiling[0m serde_spanned v1.1.2
+[1m[92m   Compiling[0m erased-serde v0.4.10
+[1m[92m   Compiling[0m toml_datetime v1.1.2+spec-1.1.0
+[1m[92m   Compiling[0m toml_parser v1.1.5+spec-1.1.0
+[1m[92m   Compiling[0m phf_shared v0.13.1
+[1m[92m   Compiling[0m fastrand v2.5.0
+[1m[92m   Compiling[0m phf v0.13.1
+[1m[92m   Compiling[0m serde-untagged v0.1.9
+[1m[92m   Compiling[0m toml v1.1.8+spec-1.1.0
+[1m[92m   Compiling[0m json-patch v4.2.0
+[1m[92m   Compiling[0m urlpattern v0.6.0
+[1m[92m   Compiling[0m infer v0.22.0
+[1m[92m   Compiling[0m cookie v0.18.2
+[1m[92m   Compiling[0m x11-dl v2.21.0
+[1m[92m   Compiling[0m libdbus-sys v0.2.7
+[1m[92m   Compiling[0m plist v1.10.1
+[1m[92m   Compiling[0m event-listener v5.4.2
+[1m[92m   Compiling[0m crossbeam-channel v0.5.17
+[1m[92m   Compiling[0m concurrent-queue v2.5.0
+[1m[92m   Compiling[0m serde_with v3.24.0
+[1m[92m   Compiling[0m parking_lot_core v0.9.12
+[1m[92m   Compiling[0m atomic-waker v1.1.2
+[1m[92m   Compiling[0m semver v1.0.28
+[1m[92m   Compiling[0m dlopen2 v0.8.2
+[1m[92m   Compiling[0m parking_lot v0.12.5
+[1m[92m   Compiling[0m event-listener-strategy v0.5.4
+[1m[92m   Compiling[0m dbus v0.9.12
+[1m[92m   Compiling[0m tauri-utils v2.10.2
+[1m[92m   Compiling[0m futures-lite v2.6.1
+[1m[92m   Compiling[0m proc-macro2 v1.0.107
+[1m[92m   Compiling[0m gdkwayland-sys v0.18.2
+[1m[92m   Compiling[0m linux-raw-sys v0.12.1
+[1m[92m   Compiling[0m zeroize v1.9.1
+[1m[92m   Compiling[0m rustls-pki-types v1.15.1
+[1m[92m   Compiling[0m rustix v1.1.5
+[1m[92m   Compiling[0m quote v1.0.47
+[1m[92m   Compiling[0m keyboard-types v0.8.3
+[1m[92m   Compiling[0m pango v0.18.3
+[1m[92m   Compiling[0m gdk-pixbuf v0.18.5
+[1m[92m   Compiling[0m gdk v0.18.2
+[1m[92m   Compiling[0m soup3 v0.5.0
+[1m[92m   Compiling[0m http-body v1.1.0
+[1m[92m   Compiling[0m tracing-core v0.1.36
+[1m[92m   Compiling[0m getrandom v0.2.17
+[1m[92m   Compiling[0m untrusted v0.9.0
+[1m[92m   Compiling[0m ring v0.17.14
+[1m[92m   Compiling[0m tracing v0.1.44
+[1m[92m   Compiling[0m serialize-to-javascript v0.1.2
+[1m[92m   Compiling[0m polling v3.11.0
+[1m[92m   Compiling[0m gtk v0.18.2
+[1m[92m   Compiling[0m gdkx11 v0.18.2
+[1m[92m   Compiling[0m syn v3.0.9
+[1m[92m   Compiling[0m getrandom v0.3.4
+[1m[92m   Compiling[0m tower-service v0.3.3
+[1m[92m   Compiling[0m mime v0.3.17
+[1m[92m   Compiling[0m try-lock v0.2.5
+[1m[92m   Compiling[0m async-task v4.7.1
+[1m[92m   Compiling[0m want v0.3.2
+[1m[92m   Compiling[0m async-io v2.6.0
+[1m[92m   Compiling[0m rustls-webpki v0.103.15
+[1m[92m   Compiling[0m httparse v1.10.1
+[1m[92m   Compiling[0m async-channel v2.5.0
+[1m[92m   Compiling[0m enumflags2 v0.7.12
+[1m[92m   Compiling[0m zcheapstr v1.1.0
+[1m[92m   Compiling[0m subtle v2.6.1
+[1m[92m   Compiling[0m hyper v1.12.0
+[1m[92m   Compiling[0m rustls v0.23.46
+[1m[92m   Compiling[0m async-signal v0.2.14
+[1m[92m   Compiling[0m async-lock v3.4.2
+[1m[92m   Compiling[0m zvariant_utils v4.2.0
+[1m[92m   Compiling[0m zvariant v5.15.1
+[1m[92m   Compiling[0m piper v0.2.5
+[1m[92m   Compiling[0m sync_wrapper v1.0.2
+[1m[92m   Compiling[0m is-docker v0.2.0
+[1m[92m   Compiling[0m tower-layer v0.3.3
+[1m[92m   Compiling[0m ipnet v2.12.2
+[1m[92m   Compiling[0m hyper-util v0.1.21
+[1m[92m   Compiling[0m zbus_names v4.3.5
+[1m[92m   Compiling[0m tower v0.5.3
+[1m[92m   Compiling[0m tokio-rustls v0.26.6
+[1m[92m   Compiling[0m is-wsl v0.4.0
+[1m[92m   Compiling[0m blocking v1.7.0
+[1m[92m   Compiling[0m async-process v2.5.0
+[1m[92m   Compiling[0m libz-sys v1.1.30
+[1m[92m   Compiling[0m async-executor v1.14.0
+[1m[92m   Compiling[0m webpki-roots v1.0.9
+[1m[92m   Compiling[0m async-broadcast v0.7.2
+[1m[92m   Compiling[0m ordered-stream v0.2.0
+[1m[92m   Compiling[0m ryu v1.0.23
+[1m[92m   Compiling[0m hex v0.4.3
+[1m[92m   Compiling[0m serde_urlencoded v0.7.1
+[1m[92m   Compiling[0m hyper-rustls v0.27.10
+[1m[92m   Compiling[0m zbus v5.19.0
+[1m[92m   Compiling[0m libgit2-sys v0.18.8+1.9.7
+[1m[92m   Compiling[0m open v5.4.4
+[1m[92m   Compiling[0m tower-http v0.6.11
+[1m[92m   Compiling[0m num-traits v0.2.19
+[1m[92m   Compiling[0m rfd v0.16.0
+[1m[92m   Compiling[0m http-body-util v0.1.5
+[1m[92m   Compiling[0m fern v0.7.1
+[1m[92m   Compiling[0m bstr v1.13.1
+[1m[92m   Compiling[0m iana-time-zone v0.1.65
+[1m[92m   Compiling[0m base64 v0.22.1
+[1m[92m   Compiling[0m tinyvec v1.13.3
+[1m[92m   Compiling[0m reqwest v0.12.28
+[1m[92m   Compiling[0m unicode-normalization v0.1.26
+[1m[92m   Compiling[0m chrono v0.4.45
+[1m[92m   Compiling[0m globset v0.4.20
+[1m[92m   Compiling[0m git2 v0.21.0
+[1m[92m   Compiling[0m dirs v6.0.0
+[1m[92m   Compiling[0m webkit2gtk v2.0.2
+[1m[92m   Compiling[0m tao v0.37.1
+[1m[92m   Compiling[0m muda v0.20.0
+[1m[92m   Compiling[0m tauri-runtime v2.12.2
+[1m[92m   Compiling[0m wry v0.57.0
+[1m[92m   Compiling[0m tauri-runtime-wry v2.12.2
+[1m[92m   Compiling[0m tauri v2.12.4
+[1m[92m   Compiling[0m tauri-plugin-fs v2.7.1
+[1m[92m   Compiling[0m tauri-plugin-opener v2.7.2
+[1m[92m   Compiling[0m tauri-plugin-log v2.10.1
+[1m[92m   Compiling[0m tauri-plugin-dialog v2.8.3
+[1m[92m   Compiling[0m agentguard-desktop v0.1.0 (/home/runner/work/agentguard-desktop/agentguard-desktop/src-tauri)
+[1m[92m    Finished[0m `test` profile [unoptimized] target(s) in 50.88s
+[1m[92m     Running[0m unittests src/lib.rs (target/debug/deps/agentguard_desktop_lib-f99e69980af57f78)
+
+running 6 tests
+test util::tests::entropy_detects_random_strings ... ok
+test util::tests::finding_ids_are_stable ... ok
+test util::tests::masks_secrets_safely ... ok
+test util::tests::noise_paths ... ok
+test catalog::tests::catalog_loads_and_matches_paths ... FAILED
+test catalog::tests::glob_root_and_nested ... FAILED
+
+failures:
+
+---- catalog::tests::catalog_loads_and_matches_paths stdout ----
+
+thread 'catalog::tests::catalog_loads_and_matches_paths' (11957) panicked at src/catalog.rs:175:39:
+catalog loads: Catalog("embedded catalog is invalid: unknown variant `ci_cd`, expected one of `secrets`, `dangerous`, `security`, `tests`, `suspicious`, `supply_chain`, `cicd` at line 6168 column 23")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- catalog::tests::glob_root_and_nested stdout ----
+
+thread 'catalog::tests::glob_root_and_nested' (11958) panicked at src/catalog.rs:187:39:
+catalog loads: Catalog("embedded catalog is invalid: unknown variant `ci_cd`, expected one of `secrets`, `dangerous`, `security`, `tests`, `suspicious`, `supply_chain`, `cicd` at line 6168 column 23")
+
+
+failures:
+    catalog::tests::catalog_loads_and_matches_paths
+    catalog::tests::glob_root_and_nested
+
+test result: FAILED. 4 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[1m[91merror[0m: test failed, to rerun pass `--lib`
