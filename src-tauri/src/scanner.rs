@@ -126,6 +126,17 @@ pub fn run_scan(
             .then(a.line.cmp(&b.line))
     });
 
+    // Final privacy pass: whatever engine or heuristic produced a finding, a
+    // credential must not reach the UI, the JSON history or an exported report
+    // in clear text. `mask_secrets_in` only touches secret-shaped tokens, so
+    // ordinary snippets are unchanged and already-masked values stay as they are.
+    for f in &mut findings {
+        f.snippet = catalog.mask_secrets_in(&f.snippet);
+        if let Some(m) = f.matched.take() {
+            f.matched = Some(catalog.mask_secrets_in(&m));
+        }
+    }
+
     emit_progress(app, &scan_id, "scoring", 84, "Scoring risk…", "در حال امتیازدهی ریسک…", None);
     let summary = summarize(&findings, &ctx, &changes, &enabled, catalog);
 
@@ -399,11 +410,16 @@ mod tests {
         for f in &findings {
             assert!(
                 !f.snippet.contains(FAKE_AWS_KEY),
-                "snippet leaked the secret: {}",
+                "rule {} leaked the secret in its snippet: {}",
+                f.rule_id,
                 f.snippet
             );
             if let Some(m) = &f.matched {
-                assert!(!m.contains(FAKE_AWS_KEY), "matched leaked the secret: {m}");
+                assert!(
+                    !m.contains(FAKE_AWS_KEY),
+                    "rule {} leaked the secret in its matched fragment: {m}",
+                    f.rule_id
+                );
             }
         }
         assert!(
