@@ -1,0 +1,13 @@
+751:error: failed to run custom build command for `agentguard-desktop v0.1.0 (/home/runner/work/agentguard-desktop/agentguard-desktop/src-tauri)`
+752-
+753-Caused by:
+754-  process didn't exit successfully: `/home/runner/work/agentguard-desktop/agentguard-desktop/src-tauri/target/debug/build/agentguard-desktop-abb15bf8dc4c45ab/build-script-build` (exit status: 1)
+755-  --- stdout
+756-  cargo:rerun-if-env-changed=TAURI_CONFIG
+757-  cargo:rustc-check-cfg=cfg(desktop)
+758-  cargo:rustc-cfg=desktop
+759-  cargo:rustc-check-cfg=cfg(mobile)
+760-  cargo:rerun-if-changed=/home/runner/work/agentguard-desktop/agentguard-desktop/src-tauri/tauri.conf.json
+761-  unknown field `dangerousRemoteDomainIpcAccess`, expected one of `csp`, `dev-csp`, `devCsp`, `freeze-prototype`, `freezePrototype`, `dangerous-disable-asset-csp-modification`, `dangerousDisableAssetCspModification`, `asset-protocol`, `assetProtocol`, `pattern`, `capabilities`, `headers`
+762-  found an unknown configuration field. This usually means that you are using a CLI version that is newer than `tauri-build` and is incompatible. Please try updating the Rust crates by running `cargo update` in the Tauri app folder.
+763:warning: build failed, waiting for other jobs to finish...
