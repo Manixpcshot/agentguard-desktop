@@ -1,13 +1,227 @@
-607:error: failed to run custom build command for `agentguard-desktop v0.1.0 (D:\a\agentguard-desktop\agentguard-desktop\src-tauri)`
-608-
-609-Caused by:
-610-  process didn't exit successfully: `D:\a\agentguard-desktop\agentguard-desktop\src-tauri\target\debug\build\agentguard-desktop-e30fbc0b4fef0914\build-script-build` (exit code: 1)
-611-  --- stdout
-612-  cargo:rerun-if-env-changed=TAURI_CONFIG
-613-  cargo:rustc-check-cfg=cfg(desktop)
-614-  cargo:rustc-cfg=desktop
-615-  cargo:rustc-check-cfg=cfg(mobile)
-616-  cargo:rerun-if-changed=D:\a\agentguard-desktop\agentguard-desktop\src-tauri\tauri.conf.json
-617-  unknown field `dangerousRemoteDomainIpcAccess`, expected one of `csp`, `dev-csp`, `devCsp`, `freeze-prototype`, `freezePrototype`, `dangerous-disable-asset-csp-modification`, `dangerousDisableAssetCspModification`, `asset-protocol`, `assetProtocol`, `pattern`, `capabilities`, `headers`
-618-  found an unknown configuration field. This usually means that you are using a CLI version that is newer than `tauri-build` and is incompatible. Please try updating the Rust crates by running `cargo update` in the Tauri app folder.
-619:warning: build failed, waiting for other jobs to finish...
+613:error[E0432]: unresolved import `git2::DeltaType`
+614-  --> src\gitmod.rs:10:24
+615-   |
+616-10 | use git2::{BranchType, DeltaType, DiffFlags, DiffOptions, FileMode, Repository, Sort, StatusOptions};
+617-   |                        ^^^^^^^^^ no `DeltaType` in the root
+618-
+619:error[E0106]: missing lifetime specifier
+620-  --> src\report.rs:41:45
+621-   |
+622-41 | fn t(en: &str, fa: &str, lang: Language) -> &str {
+623-   |          ----      ----                     ^ expected named lifetime parameter
+624-   |
+625-   = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `en` or `fa`
+626-help: consider introducing a named lifetime parameter
+627-   |
+628-41 | fn t<'a>(en: &'a str, fa: &'a str, lang: Language) -> &'a str {
+629-   |     ++++      ++           ++                          ++
+630-
+631:warning: unused import: `Manager`
+632-  --> src\commands.rs:15:33
+633-   |
+634-15 | use tauri::{AppHandle, Emitter, Manager, State};
+635-   |                                 ^^^^^^^
+636-   |
+637-   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+638-
+639:error[E0308]: mismatched types
+640-  --> src\gitmod.rs:53:27
+641-   |
+642-53 |             info.branch = head.shorthand().map(|s| s.to_string());
+643-   |             -----------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Option<String>`, found `Result<String, Error>`
+644-   |             |
+645-   |             expected due to the type of this binding
+646-   |
+647-   = note: expected enum `std::option::Option<std::string::String>`
+648-              found enum `Result<std::string::String, git2::Error>`
+649-
+650:error[E0599]: the method `to_string` exists for enum `std::option::Option<&str>`, but its trait bounds were not satisfied
+651-  --> src\gitmod.rs:56:64
+652-   |
+653-56 |                 info.head_subject = commit.summary().map(|s| s.to_string());
+654-   |                                                                ^^^^^^^^^ method cannot be called on `std::option::Option<&str>` due to unsatisfied trait bounds
+655-   |
+656-   = note: the following trait bounds were not satisfied:
+657-           `std::option::Option<&str>: std::fmt::Display`
+658-           which is required by `std::option::Option<&str>: ToString`
+659-note: the method `to_string` exists on the type `&str`
+660-  --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library\alloc\src\string.rs:2917:4
+661-help: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`
+662-   |
+663-56 |                 info.head_subject = commit.summary().map(|s| s.expect("REASON").to_string());
+664-   |                                                               +++++++++++++++++
+--
+666:error[E0599]: the method `to_string` exists for enum `std::option::Option<&str>`, but its trait bounds were not satisfied
+667-  --> src\gitmod.rs:96:59
+668-   |
+669-96 |         info.remotes = remotes.iter().flatten().map(|s| s.to_string()).collect();
+670-   |                                                           ^^^^^^^^^ method cannot be called on `std::option::Option<&str>` due to unsatisfied trait bounds
+671-   |
+672-   = note: the following trait bounds were not satisfied:
+673-           `std::option::Option<&str>: std::fmt::Display`
+674-           which is required by `std::option::Option<&str>: ToString`
+675-note: the method `to_string` exists on the type `&str`
+676-  --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library\alloc\src\string.rs:2917:4
+677-help: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`
+678-   |
+679-96 |         info.remotes = remotes.iter().flatten().map(|s| s.expect("REASON").to_string()).collect();
+680-   |                                                          +++++++++++++++++
+--
+682:error[E0599]: the method `to_string` exists for enum `std::option::Option<&str>`, but its trait bounds were not satisfied
+683-   --> src\gitmod.rs:122:59
+684-    |
+685-122 |             subject: commit.summary().unwrap_or_default().to_string(),
+686-    |                                                           ^^^^^^^^^ method cannot be called on `std::option::Option<&str>` due to unsatisfied trait bounds
+687-    |
+688-    = note: the following trait bounds were not satisfied:
+689-            `std::option::Option<&str>: std::fmt::Display`
+690-            which is required by `std::option::Option<&str>: ToString`
+691-note: the method `to_string` exists on the type `&str`
+692-   --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library\alloc\src\string.rs:2917:4
+693-help: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`
+694-    |
+695-122 |             subject: commit.summary().unwrap_or_default().expect("REASON").to_string(),
+696-    |                                                          +++++++++++++++++
+--
+698:error[E0599]: no method named `diff_head_to_index` found for reference `&git2::Repository` in the current scope
+699-    --> src\gitmod.rs:160:34
+700-     |
+701- 160 |         ScanBase::Staged => repo.diff_head_to_index(None, Some(&mut opts))?,
+702-     |                                  ^^^^^^^^^^^^^^^^^^
+703-     |
+704-help: there is a method `diff_tree_to_index` with a similar name, but with different arguments
+705-    --> C:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\git2-0.21.0\src\repo.rs:2908:5
+706-     |
+707-2908 | /     pub fn diff_tree_to_index(
+708-2909 | |         &self,
+709-2910 | |         old_tree: Option<&Tree<'_>>,
+710-2911 | |         index: Option<&Index>,
+711-2912 | |         opts: Option<&mut DiffOptions>,
+712-2913 | |     ) -> Result<Diff<'_>, Error> {
+--
+715:error[E0599]: no method named `num_hunks` found for enum `std::option::Option<T>` in the current scope
+716-   --> src\gitmod.rs:243:40
+717-    |
+718-243 |                 let hunk_count = patch.num_hunks();
+719-    |                                        ^^^^^^^^^ method not found in `std::option::Option<git2::Patch<'_>>`
+720-    |
+721-note: the method `num_hunks` exists on the type `git2::Patch<'_>`
+722-   --> C:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\git2-0.21.0\src\patch.rs:133:5
+723-    |
+724-133 |     pub fn num_hunks(&self) -> usize {
+725-    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+726-help: consider using `Option::expect` to unwrap the `git2::Patch<'_>` value, panicking if the value is an `Option::None`
+727-    |
+728-243 |                 let hunk_count = patch.expect("REASON").num_hunks();
+729-    |                                       +++++++++++++++++
+--
+731:error[E0599]: no method named `get_hunk` found for enum `std::option::Option<T>` in the current scope
+732-   --> src\gitmod.rs:245:54
+733-    |
+734-245 |                     let (hunk, _range) = match patch.get_hunk(h) {
+735-    |                                                      ^^^^^^^^ method not found in `std::option::Option<git2::Patch<'_>>`
+736-
+737:error[E0599]: no method named `num_lines_in_hunk` found for enum `std::option::Option<T>` in the current scope
+738-   --> src\gitmod.rs:251:44
+739-    |
+740-251 |                     let line_count = patch.num_lines_in_hunk(h).unwrap_or(0);
+741-    |                                            ^^^^^^^^^^^^^^^^^ method not found in `std::option::Option<git2::Patch<'_>>`
+742-    |
+743-note: the method `num_lines_in_hunk` exists on the type `git2::Patch<'_>`
+744-   --> C:\Users\runneradmin\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\git2-0.21.0\src\patch.rs:166:5
+745-    |
+746-166 |     pub fn num_lines_in_hunk(&self, hunk_idx: usize) -> Result<usize, Error> {
+747-    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+748-help: consider using `Option::expect` to unwrap the `git2::Patch<'_>` value, panicking if the value is an `Option::None`
+749-    |
+750-251 |                     let line_count = patch.expect("REASON").num_lines_in_hunk(h).unwrap_or(0);
+751-    |                                           +++++++++++++++++
+--
+753:error[E0599]: no method named `get_line_in_hunk` found for enum `std::option::Option<T>` in the current scope
+754-   --> src\gitmod.rs:253:66
+755-    |
+756-253 |                         let (line, old_no, new_no) = match patch.get_line_in_hunk(h, l) {
+757-    |                                                                  ^^^^^^^^^^^^^^^^ method not found in `std::option::Option<git2::Patch<'_>>`
+758-
+759:error[E0277]: the trait bound `models::RiskBand: std::default::Default` is not satisfied
+760-   --> src\models.rs:495:5
+761-    |
+762-487 | #[derive(Debug, Clone, Serialize, Deserialize, Default)]
+763-    |                                                ------- in this derive macro expansion
+764-...
+765-495 |     pub risk_band: RiskBand,
+766-    |     ^^^^^^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `models::RiskBand`
+767-    |
+768-help: consider annotating `models::RiskBand` with `#[derive(Default)]`
+769-    |
+770-458 + #[derive(Default)]
+771-459 | pub enum RiskBand {
+772-    |
+773-
+774:error[E0277]: the trait bound `models::Verdict: std::default::Default` is not satisfied
+775-   --> src\models.rs:496:5
+776-    |
+777-487 | #[derive(Debug, Clone, Serialize, Deserialize, Default)]
+778-    |                                                ------- in this derive macro expansion
+779-...
+780-496 |     pub verdict: Verdict,
+781-    |     ^^^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `models::Verdict`
+782-    |
+783-help: consider annotating `models::Verdict` with `#[derive(Default)]`
+784-    |
+785-468 + #[derive(Default)]
+786-469 | pub enum Verdict {
+787-    |
+788-
+789:error[E0277]: the trait bound `models::Severity: std::default::Default` is not satisfied
+790-   --> src\models.rs:538:5
+791-    |
+792-533 | #[derive(Debug, Clone, Serialize, Deserialize, Default)]
+793-    |                                                ------- in this derive macro expansion
+794-...
+795-538 |     pub severity: Severity,
+796-    |     ^^^^^^^^^^^^^^^^^^^^^^ the trait `std::default::Default` is not implemented for `models::Severity`
+797-    |
+798-help: consider annotating `models::Severity` with `#[derive(Default)]`
+799-    |
+800- 13 + #[derive(Default)]
+801- 14 | pub enum Severity {
+802-    |
+803-
+804:error[E0597]: `changes` does not live long enough
+805-  --> src\commands.rs:74:8
+806-   |
+807-73 |     let mut changes = gitmod::build_changes(&repo, &base, true, 6, 4_000_000, Some(&file))?;
+808-   |         ----------- binding `changes` declared here
+809-74 |     Ok(changes.drain(..).next())
+810-   |        ^^^^^^^----------
+811-   |        |
+812-   |        borrowed value does not live long enough
+813-   |        a temporary with access to the borrow is created here ...
+814-75 | }
+815-   | -
+816-   | |
+817-   | `changes` dropped here while still borrowed
+818-   | ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `std::vec::Drain`
+--
+827:error[E0505]: cannot move out of `options` because it is borrowed
+828-   --> src\scanner.rs:144:9
+829-    |
+830- 44 |     options: ScanOptions,
+831-    |     ------- binding `options` declared here
+832-...
+833- 79 |         options: &options,
+834-    |                  -------- borrow of `options` occurs here
+835-...
+836-144 |         options,
+837-    |         ^^^^^^^ move out of `options` occurs here
+838-...
+839-149 |         warnings: ctx.warnings.clone(),
+840-    |                   ------------ borrow later used here
+841-    |
+--
+849:warning: `agentguard-desktop` (lib) generated 1 warning (1 duplicate)
+850:error: could not compile `agentguard-desktop` (lib) due to 16 previous errors; 1 warning emitted
+851:warning: build failed, waiting for other jobs to finish...
+852:warning: `agentguard-desktop` (lib test) generated 1 warning
+853:error: could not compile `agentguard-desktop` (lib test) due to 16 previous errors; 1 warning emitted
