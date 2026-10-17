@@ -72,16 +72,26 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          $bundle = 'src-tauri/target/x86_64-pc-windows-msvc/release/bundle'
-          $exe = 'src-tauri/target/x86_64-pc-windows-msvc/release/AgentGuard.exe'
+          $rel = 'src-tauri/target/x86_64-pc-windows-msvc/release'
+          $bundle = "$rel/bundle"
           New-Item -ItemType Directory -Force -Path dist-release | Out-Null
 
           $found = Get-ChildItem -Recurse $bundle -Include *.exe, *.msi -File
           if (-not $found) { throw "no installer artifacts found under $bundle" }
           $found | ForEach-Object { Copy-Item $_.FullName dist-release/ }
 
-          if (Test-Path $exe) { Copy-Item $exe dist-release/AgentGuard-portable.exe }
-          else { Write-Warning "portable executable not found at $exe" }
+          # The raw executable keeps the Cargo crate name unless Tauri renames it.
+          $exe = @(
+            "$rel/AgentGuard.exe",
+            "$rel/agentguard-desktop.exe"
+          ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $exe) {
+            $exe = Get-ChildItem $rel -Filter *.exe -File |
+              Where-Object { $_.Name -notmatch 'build' } |
+              Sort-Object Length -Descending | Select-Object -First 1 -ExpandProperty FullName
+          }
+          if (-not $exe) { throw "no application executable found under $rel" }
+          Copy-Item $exe dist-release/AgentGuard-portable.exe
 
           $files = Get-ChildItem dist-release -File | Sort-Object Name
           $files | ForEach-Object {
