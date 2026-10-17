@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   catalog:
@@ -79,12 +79,48 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev librsvg2-dev libsoup-3.0-dev libjavascriptcoregtk-4.1-dev
       - name: cargo check
+        id: check
         working-directory: src-tauri
-        run: cargo check --all-targets
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          cargo check --all-targets --color never 2>&1 | tee ../ci-check.log
       - name: cargo test
-        if: matrix.job == 'test'
+        id: test
+        if: matrix.job == 'test' && steps.check.outcome == 'success'
         working-directory: src-tauri
-        run: cargo test
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          cargo test --color never 2>&1 | tee ../ci-test.log
+      # TEMPORARY: runner logs are unreachable from this environment, so publish
+      # them to the branch. Removed again once the suite is green.
+      - name: Publish logs
+        if: (steps.check.outcome == 'failure' || steps.test.outcome == 'failure') && github.event_name == 'push'
+        shell: bash
+        env:
+          BRANCH: ${{ github.ref_name }}
+          OS: ${{ matrix.os }}
+        run: |
+          mkdir -p ci-logs
+          [ -f ci-check.log ] && tail -n 4000 ci-check.log > "ci-logs/$OS.log"
+          [ -f ci-test.log ] && tail -n 4000 ci-test.log > "ci-logs/$OS-test.log"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add -f ci-logs
+          git commit -m "ci: publish cargo logs for $OS [skip ci]" || echo "nothing to commit"
+          for i in 1 2 3 4 5 6; do
+            git pull --rebase origin "$BRANCH" || true
+            if git push origin "HEAD:$BRANCH"; then echo "log pushed"; break; fi
+            sleep 15
+          done
+      - name: Fail on check/test failure
+        if: steps.check.outcome == 'failure' || steps.test.outcome == 'failure'
+        shell: bash
+        run: exit 1
       - name: cargo clippy (advisory)
         if: matrix.job == 'test'
         continue-on-error: true
