@@ -33,20 +33,43 @@ jobs:
 
       - run: npm ci
 
-      - name: Build bundles (NSIS installer + MSI + exe)
-        working-directory: src-tauri
-        run: cargo tauri build --target x86_64-pc-windows-msvc --bundles nsis,msi
-
-      - name: Collect artifacts
+      - name: Print versions
         shell: pwsh
         run: |
+          node --version
+          npm --version
+          rustc --version
+          cargo --version
+
+      - name: Build bundles (NSIS installer + MSI + exe)
+        shell: pwsh
+        run: |
+          npm run tauri build -- --target x86_64-pc-windows-msvc --bundles nsis,msi
+
+      - name: Collect artifacts and checksums
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $bundle = 'src-tauri/target/x86_64-pc-windows-msvc/release/bundle'
+          $exe = 'src-tauri/target/x86_64-pc-windows-msvc/release/AgentGuard.exe'
           New-Item -ItemType Directory -Force -Path dist-release | Out-Null
-          Get-ChildItem -Recurse src-tauri/target/x86_64-pc-windows-msvc/release/bundle |
-            Where-Object { $_.Extension -in '.exe', '.msi' } |
-            ForEach-Object { Copy-Item $_.FullName dist-release/ }
-          Get-ChildItem src-tauri/target/x86_64-pc-windows-msvc/release/AgentGuard.exe |
-            ForEach-Object { Copy-Item $_.FullName dist-release/AgentGuard-portable.exe }
-          Get-ChildItem dist-release | Format-Table Name, Length
+
+          $found = Get-ChildItem -Recurse $bundle -Include *.exe, *.msi -File
+          if (-not $found) { throw "no installer artifacts found under $bundle" }
+          $found | ForEach-Object { Copy-Item $_.FullName dist-release/ }
+
+          if (Test-Path $exe) { Copy-Item $exe dist-release/AgentGuard-portable.exe }
+          else { Write-Warning "portable executable not found at $exe" }
+
+          $files = Get-ChildItem dist-release -File | Sort-Object Name
+          $files | ForEach-Object {
+            $h = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            Add-Content -Path dist-release/SHA256SUMS.txt -Value ("{0}  {1}" -f $h, $_.Name)
+          }
+          Write-Host "=== release artifacts ==="
+          $files | ForEach-Object { Write-Host ("{0,-52} {1,8:N1} MB" -f $_.Name, ($_.Length / 1MB)) }
+          Write-Host "=== SHA256SUMS.txt ==="
+          Get-Content dist-release/SHA256SUMS.txt
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -62,6 +85,7 @@ jobs:
           files: |
             dist-release/*.exe
             dist-release/*.msi
+            dist-release/SHA256SUMS.txt
           body_path: RELEASE_NOTES.md
           draft: false
           prerelease: ${{ contains(github.ref_name, '-') }}

@@ -145,3 +145,25 @@ jobs:
         with:
           name: cargo-lock
           path: src-tauri/Cargo.lock
+
+      # Bootstrap helper: commit the generated lockfile once so releases are
+      # reproducible. No-op after src-tauri/Cargo.lock is tracked.
+      - name: Publish Cargo.lock (bootstrap)
+        if: matrix.os == 'ubuntu-latest' && github.event_name == 'push'
+        shell: bash
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          if git ls-files --error-unmatch src-tauri/Cargo.lock >/dev/null 2>&1; then
+            echo "Cargo.lock already tracked"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add -f src-tauri/Cargo.lock
+          git commit -m "chore: commit Cargo.lock for reproducible builds [skip ci]"
+          for i in 1 2 3 4 5 6; do
+            git pull --rebase origin "$BRANCH" || true
+            if git push origin "HEAD:$BRANCH"; then echo "lock pushed"; break; fi
+            sleep 15
+          done
