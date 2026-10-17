@@ -44,7 +44,29 @@ jobs:
       - name: Build bundles (NSIS installer + MSI + exe)
         shell: pwsh
         run: |
-          npm run tauri build -- --target x86_64-pc-windows-msvc --bundles nsis,msi
+          npm run tauri build -- --target x86_64-pc-windows-msvc --bundles nsis,msi 2>&1 |
+            Tee-Object -FilePath tauri-build.log
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      # Temporary debug scaffolding: runner logs are not reachable from every
+      # environment, so on failure push the tail of the build log to the branch.
+      - name: Publish build log on failure
+        if: failure()
+        shell: pwsh
+        env:
+          DEBUG_BRANCH: arena/c5299bad-agentguard-desktop
+        run: |
+          if (-not (Test-Path tauri-build.log)) { Write-Host "no build log"; exit 0 }
+          New-Item -ItemType Directory -Force -Path ci-logs | Out-Null
+          Get-Content tauri-build.log -Tail 4000 |
+            Set-Content -Encoding utf8 ci-logs/release-windows.log
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin $env:DEBUG_BRANCH
+          git checkout -B $env:DEBUG_BRANCH "origin/$env:DEBUG_BRANCH"
+          git add -f ci-logs
+          git commit -m "ci: publish release build log [skip ci]"
+          git push origin "HEAD:$env:DEBUG_BRANCH"
 
       - name: Collect artifacts and checksums
         shell: pwsh
