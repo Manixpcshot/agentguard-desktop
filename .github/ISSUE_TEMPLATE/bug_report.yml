@@ -1,0 +1,69 @@
+name: Bug report
+description: Something in AgentGuard is broken or wrong
+labels: ["bug"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Before you submit
+      options:
+        - label: I searched existing issues and this is not a duplicate
+          required: true
+        - label: This is not a security vulnerability in AgentGuard itself (use the Security Advisories page instead)
+          required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      placeholder: Describe the bug and the expected behaviour.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open project ...
+        2. Set base to ...
+        3. Start scan
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: AgentGuard version
+      placeholder: e.g. 0.1.0 (see About in the app)
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Windows version
+      options:
+        - Windows 11 24H2
+        - Windows 11 23H2
+        - Windows 10 22H2
+        - Windows 10 other
+        - Windows Server
+        - Other / unsure
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: How did you install it?
+      options:
+        - NSIS installer (.exe)
+        - MSI package
+        - Portable executable
+        - Built from source
+  - type: textarea
+    id: falsepos
+    attributes:
+      label: Rule / finding involved (if any)
+      description: Paste the rule id (e.g. SEC-VULN-SQLI-PY-FORMAT) and a minimal snippet. Redact secrets first.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: From Settings → "Open log file". Please use a fenced code block.
+      render: text

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "AgentGuard",
+  "version": "0.1.0",
+  "identifier": "dev.agentguard.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "AgentGuard — AI Code Change Reviewer",
+        "width": 1320,
+        "height": 860,
+        "minWidth": 1024,
+        "minHeight": 660,
+        "center": true,
+        "resizable": true,
+        "maximizable": true,
+        "minimizable": true,
+        "closable": true,
+        "decorations": true,
+        "transparent": false,
+        "theme": "Dark",
+        "backgroundColor": "#0a0f1e",
+        "titleBarStyle": "Visible"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'; frame-ancestors 'none'",
+      "dangerousRemoteDomainIpcAccess": []
+    },
+    "withGlobalTauri": false
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "msi"],
+    "createUpdaterArtifacts": false,
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.png",
+      "icons/icon.ico"
+    ],
+    "category": "DeveloperTool",
+    "copyright": "Copyright (c) 2026 AgentGuard contributors",
+    "licenseFile": "../LICENSE",
+    "publisher": "AgentGuard",
+    "homepage": "https://github.com/Manixpcshot/agentguard-desktop",
+    "shortDescription": "Local reviewer for AI-generated code changes",
+    "longDescription": "AgentGuard inspects Git changes produced by AI coding tools and flags leaked API keys and secrets, security regressions, sabotaged or broken tests, destructive commands and suspicious edits. All analysis runs locally; optional AI review uses a local Ollama model. No paid APIs, no telemetry.",
+    "windows": {
+      "digestAlgorithm": "SHA256",
+      "certificateThumbprint": null,
+      "timestampUrl": "",
+      "webviewInstallMode": {
+        "type": "downloadBootstrapper"
+      },
+      "nsis": {
+        "installerIcon": "icons/icon.ico",
+        "displayLanguageSelector": false,
+        "startMenuFolder": "AgentGuard"
+      }
+    },
+    "fileAssociations": []
+  },
+  "plugins": {}
+}
