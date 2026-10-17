@@ -1,5 +1,5 @@
    Compiling agentguard-desktop v0.1.0 (/home/runner/work/agentguard-desktop/agentguard-desktop/src-tauri)
-    Finished `test` profile [unoptimized] target(s) in 5.99s
+    Finished `test` profile [unoptimized] target(s) in 4.69s
      Running unittests src/lib.rs (target/debug/deps/agentguard_desktop_lib-f99e69980af57f78)
 
 running 13 tests
@@ -7,13 +7,13 @@ test models::tests::category_and_severity_serde_names_match_as_str ... ok
 test models::tests::defaults_are_the_quiet_end_of_every_scale ... ok
 test models::tests::engine_serde_names_match_as_str ... ok
 test models::tests::engine_toggles_use_camel_case_keys ... ok
-test catalog::tests::glob_root_and_nested ... ok
+test catalog::tests::masks_secrets_without_touching_ordinary_code ... ok
 test catalog::tests::catalog_loads_and_matches_paths ... ok
 test util::tests::entropy_detects_random_strings ... ok
 test util::tests::finding_ids_are_stable ... ok
 test util::tests::masks_secrets_safely ... ok
 test util::tests::noise_paths ... ok
-test catalog::tests::masks_secrets_without_touching_ordinary_code ... ok
+test catalog::tests::glob_root_and_nested ... ok
 test scanner::tests::flags_leaked_key_and_piped_installer_then_blocks ... FAILED
 test scanner::tests::passes_a_clean_documentation_change ... ok
 
@@ -21,14 +21,14 @@ failures:
 
 ---- scanner::tests::flags_leaked_key_and_piped_installer_then_blocks stdout ----
 
-thread 'scanner::tests::flags_leaked_key_and_piped_installer_then_blocks' (4866) panicked at src/scanner.rs:400:13:
-snippet leaked the secret: const AWS_ACCESS_KEY = "AKIAQ7Z3M9P2W8XRT4VB";
+thread 'scanner::tests::flags_leaked_key_and_piped_installer_then_blocks' (4612) panicked at src/scanner.rs:411:13:
+rule SEC-SECRET-HIGH-ENTROPY-STRING leaked the secret in its snippet: const AWS_ACCESS_KEY = "AKIAQ7Z3M9P2W8XRT4VB";
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 
 failures:
     scanner::tests::flags_leaked_key_and_piped_installer_then_blocks
 
-test result: FAILED. 12 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.00s
+test result: FAILED. 12 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.76s
 
 error: test failed, to rerun pass `--lib`
