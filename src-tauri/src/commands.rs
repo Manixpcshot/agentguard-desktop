@@ -12,7 +12,7 @@ use std::fs;
 use std::path::Path;
 use std::sync::atomic::AtomicBool;
 use std::sync::{Arc, Mutex};
-use tauri::{AppHandle, Emitter, Manager, State};
+use tauri::{AppHandle, Emitter, State};
 use tauri_plugin_dialog::DialogExt;
 
 pub struct AppState {
@@ -70,8 +70,8 @@ pub fn list_commits(path: String, refname: Option<String>, limit: usize) -> AppR
 #[tauri::command]
 pub fn get_file_diff(path: String, base: ScanBase, file: String) -> AppResult<Option<FileChange>> {
     let repo = gitmod::open(&path)?;
-    let mut changes = gitmod::build_changes(&repo, &base, true, 6, 4_000_000, Some(&file))?;
-    Ok(changes.drain(..).next())
+    let changes = gitmod::build_changes(&repo, &base, true, 6, 4_000_000, Some(&file))?;
+    Ok(changes.into_iter().next())
 }
 
 #[tauri::command]

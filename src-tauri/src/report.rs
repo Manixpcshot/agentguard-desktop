@@ -38,7 +38,7 @@ fn severity_label(s: Severity, lang: Language) -> &'static str {
     }
 }
 
-fn t(en: &str, fa: &str, lang: Language) -> &str {
+fn t<'a>(en: &'a str, fa: &'a str, lang: Language) -> &'a str {
     match lang {
         Language::En => en,
         Language::Fa => fa,

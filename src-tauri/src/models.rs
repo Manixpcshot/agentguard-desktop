@@ -8,9 +8,10 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 /// Severity of a finding, ordered from least to most dangerous.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Severity {
+    #[default]
     Info,
     Low,
     Medium,
@@ -453,9 +454,10 @@ impl Finding {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum RiskBand {
+    #[default]
     Safe,
     Low,
     Elevated,
@@ -463,9 +465,10 @@ pub enum RiskBand {
     Critical,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum Verdict {
+    #[default]
     Pass,
     Review,
     Block,

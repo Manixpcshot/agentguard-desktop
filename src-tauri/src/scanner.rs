@@ -134,6 +134,9 @@ pub fn run_scan(
     };
 
     let finished_at = util::now_rfc3339();
+    // End the ctx borrow of `options` before moving `options` into the report.
+    let warnings = std::mem::take(&mut ctx.warnings);
+    drop(ctx);
     let report = ScanReport {
         id: scan_id.clone(),
         started_at,
@@ -146,7 +149,7 @@ pub fn run_scan(
         files: changes,
         findings,
         ai,
-        warnings: ctx.warnings.clone(),
+        warnings,
         catalog_version: catalog.version,
     };
 

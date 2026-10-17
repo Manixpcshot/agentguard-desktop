@@ -7,7 +7,7 @@
 use crate::error::{AppError, AppResult};
 use crate::models::*;
 use crate::util;
-use git2::{BranchType, DeltaType, DiffFlags, DiffOptions, FileMode, Repository, Sort, StatusOptions};
+use git2::{BranchType, Delta, DiffFlags, DiffOptions, FileMode, Repository, Sort, StatusOptions};
 use std::path::Path;
 
 /// Opens the repository that contains `path` (searching parent directories).
@@ -50,10 +50,10 @@ pub fn repo_info(repo: &Repository, fallback_path: &str) -> RepoInfo {
 
     match repo.head() {
         Ok(head) => {
-            info.branch = head.shorthand().map(|s| s.to_string());
+            info.branch = head.shorthand().ok().map(|s| s.to_string());
             if let Ok(commit) = head.peel_to_commit() {
                 info.head_sha = Some(commit.id().to_string());
-                info.head_subject = commit.summary().map(|s| s.to_string());
+                info.head_subject = commit.summary().ok().flatten().map(|s| s.to_string());
             }
         }
         Err(e) => info.error = Some(format!("no HEAD yet: {e}")),
@@ -93,7 +93,7 @@ pub fn repo_info(repo: &Repository, fallback_path: &str) -> RepoInfo {
     }
 
     if let Ok(remotes) = repo.remotes() {
-        info.remotes = remotes.iter().flatten().map(|s| s.to_string()).collect();
+        info.remotes = remotes.iter().filter_map(|r| r.ok().map(|s| s.to_string())).collect();
     }
 
     info
@@ -119,7 +119,7 @@ pub fn list_commits(repo: &Repository, refname: Option<&str>, limit: usize) -> A
         out.push(CommitInfo {
             sha,
             short_sha: short,
-            subject: commit.summary().unwrap_or_default().to_string(),
+            subject: commit.summary().ok().flatten().unwrap_or_default().to_string(),
             author: commit.author().name().unwrap_or_default().to_string(),
             timestamp: commit.author().when().seconds(),
         });
@@ -157,7 +157,11 @@ pub fn build_changes(
             // Unborn branch: everything in the workdir is new.
             Err(_) => repo.diff_tree_to_workdir_with_index(None, Some(&mut opts))?,
         },
-        ScanBase::Staged => repo.diff_head_to_index(None, Some(&mut opts))?,
+        ScanBase::Staged => {
+            // index vs HEAD tree (unborn HEAD -> everything staged is new)
+            let head_tree = repo.head().ok().and_then(|h| h.peel_to_tree().ok());
+            repo.diff_tree_to_index(head_tree.as_ref(), None, Some(&mut opts))?
+        }
         ScanBase::Branch(b) => {
             let head_oid = repo
                 .head()?
@@ -215,12 +219,12 @@ fn collect_changes(diff: &git2::Diff<'_>, max_file_bytes: u64) -> AppResult<Vec<
 
     for (idx, delta) in deltas.iter().enumerate() {
         let status = match delta.status() {
-            DeltaType::Added => ChangeStatus::Added,
-            DeltaType::Untracked => ChangeStatus::Untracked,
-            DeltaType::Deleted => ChangeStatus::Deleted,
-            DeltaType::Modified => ChangeStatus::Modified,
-            DeltaType::Renamed => ChangeStatus::Renamed,
-            DeltaType::Copied => ChangeStatus::Copied,
+            Delta::Added => ChangeStatus::Added,
+            Delta::Untracked => ChangeStatus::Untracked,
+            Delta::Deleted => ChangeStatus::Deleted,
+            Delta::Modified => ChangeStatus::Modified,
+            Delta::Renamed => ChangeStatus::Renamed,
+            Delta::Copied => ChangeStatus::Copied,
             _ => ChangeStatus::Typechange,
         };
         let new_path = norm(delta.new_file().path());
@@ -239,18 +243,18 @@ fn collect_changes(diff: &git2::Diff<'_>, max_file_bytes: u64) -> AppResult<Vec<
         let mut deletions = 0u32;
 
         if !is_binary && !too_large {
-            if let Ok(patch) = git2::Patch::from_diff(diff, idx) {
+            if let Ok(Some(patch)) = git2::Patch::from_diff(diff, idx) {
                 let hunk_count = patch.num_hunks();
                 for h in 0..hunk_count {
-                    let (hunk, _range) = match patch.get_hunk(h) {
+                    let (hunk, hunk_lines) = match patch.hunk(h) {
                         Ok(x) => x,
                         Err(_) => continue,
                     };
-                    let header = hunk.header().trim_end().to_string();
+                    let header = String::from_utf8_lossy(hunk.header()).trim_end().to_string();
                     let mut lines: Vec<DiffLine> = Vec::new();
-                    let line_count = patch.num_lines_in_hunk(h).unwrap_or(0);
+                    let line_count = patch.num_lines_in_hunk(h).unwrap_or(hunk_lines);
                     for l in 0..line_count {
-                        let (line, old_no, new_no) = match patch.get_line_in_hunk(h, l) {
+                        let line = match patch.line_in_hunk(h, l) {
                             Ok(x) => x,
                             Err(_) => continue,
                         };
@@ -267,9 +271,9 @@ fn collect_changes(diff: &git2::Diff<'_>, max_file_bytes: u64) -> AppResult<Vec<
                         };
                         lines.push(DiffLine {
                             kind,
-                            old_no,
-                            new_no,
-                            text: util::clean_line(line.content()),
+                            old_no: line.old_lineno(),
+                            new_no: line.new_lineno(),
+                            text: util::clean_line(&String::from_utf8_lossy(line.content())),
                         });
                     }
                     if !lines.is_empty() {
